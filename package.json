@@ -59,9 +59,13 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
+    "coverage": "npm test -- --coverage",
     "deploy": "gh-pages -d build"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
     "moduleFileExtensions": [
       "jsx",
       "js",
