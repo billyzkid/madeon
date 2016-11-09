@@ -1,7 +1,15 @@
 {
   "name": "madeon",
   "version": "0.1.0",
+  "description": "A port of Madeon's Adventure Machine to React",
+  "homepage": "https://billyzkid.github.io/madeon/",
+  "author": "Will Allan",
+  "license": "UNLICENSED",
   "private": true,
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
   "devDependencies": {
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
@@ -50,10 +58,6 @@
     "webpack-dev-server": "1.16.2",
     "webpack-manifest-plugin": "1.1.0",
     "whatwg-fetch": "1.0.0"
-  },
-  "dependencies": {
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
   },
   "scripts": {
     "start": "node scripts/start.js",
