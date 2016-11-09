@@ -1,0 +1,23 @@
+.button {
+  padding: 10px;
+  margin: 2px;
+  border: 2px solid black;
+  font: inherit;
+  color: black;
+  background: white;
+
+  &:hover,
+  &.active {
+    color: white;
+    background: black;
+  }
+
+  &[icon]::before {
+    font: 14px/1em FontAwesome;
+    content: attr(icon);
+  }
+
+  &[label]::after {
+    content: attr(label);
+  }
+}

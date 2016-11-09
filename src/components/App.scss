@@ -1,0 +1,62 @@
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font: 16px "Lato", helvetica, arial, sans-serif;
+  color: white;
+  background: gray;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  :focus {
+    outline: lime dashed 2px;
+    outline-offset: 1px;
+  }
+
+  .header {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
+
+  .buttons {
+    section {
+      position: absolute;
+      display: flex;
+      flex-flow: column;
+
+      &:nth-child(1) {
+        top: 18px;
+        left: 18px;
+      }
+
+      &:nth-child(2) {
+        top: 18px;
+        right: 18px;
+      }
+
+      &:nth-child(3) {
+        bottom: 18px;
+        left: 18px;
+      }
+
+      &:nth-child(4) {
+        bottom: 18px;
+        right: 18px;
+      }
+    }
+  }
+}
