@@ -1,12 +1,20 @@
 @import "../styles/includes.scss";
 
 .button {
+  position: relative;
+  width: 50px;
+  height: 50px;
   padding: 10px;
   margin: 2px;
   border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+  text-transform: uppercase;
   font: inherit;
   color: black;
   background: white;
+  cursor: pointer;
+  transform: rotate(45deg);
 
   &:hover,
   &.active {
@@ -14,20 +22,25 @@
     background: black;
   }
 
+  &[icon]::before,
+  &[label]::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
   &[icon]::before {
-    font: 14px/1em FontAwesome;
+    font: 14px FontAwesome;
     content: attr(icon);
   }
 
   &[label]::after {
+    font-weight: bold;
+    font-size: 10px;
     content: attr(label);
   }
 
-  &.visible {
-    @include fade-in();
-  }
-
-  &:not(.visible) {
-    @include fade-out();
-  }
+  @include button-fade-in();
+  @include button-fade-out();
 }

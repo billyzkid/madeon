@@ -21,8 +21,8 @@ export default class App extends React.PureComponent {
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
 
     this.state = {
-      isShareButtonsVisible: false,
-      isInfoButtonsVisible: true
+      isInfoButtonsVisible: false,
+      isShareButtonsVisible: false
     };
   }
 

@@ -1,11 +1,15 @@
-@mixin fade-out($duration: 200ms, $timing-function: ease-in-out, $delay: 0ms) {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity $duration $timing-function $delay, visibility $duration + $delay;
+@mixin button-fade-in($delay: 0ms) {
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: color 200ms linear 0ms, background 200ms linear 0ms, opacity 200ms ease-in-out $delay, visibility $delay;
+  }
 }
 
-@mixin fade-in($duration: 200ms, $timing-function: ease-in-out, $delay: 0ms) {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity $duration $timing-function $delay, visibility $delay;
+@mixin button-fade-out($delay: 0ms) {
+  &:not(.visible) {
+    opacity: 0;
+    visibility: hidden;
+    transition: color 200ms linear 0ms, background 200ms linear 0ms, opacity 200ms ease-in-out $delay, visibility $delay + 200ms;
+  }
 }

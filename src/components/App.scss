@@ -1,3 +1,5 @@
+@import "../styles/includes.scss";
+
 .app {
   position: relative;
   width: 100%;
@@ -41,11 +43,45 @@
       &:nth-child(1) {
         top: 18px;
         left: 18px;
+
+        .button {
+          &:nth-child(2) {
+            @include button-fade-in(0ms);
+            @include button-fade-out(400ms);
+          }
+
+          &:nth-child(3) {
+            @include button-fade-in(200ms);
+            @include button-fade-out(200ms);
+          }
+
+          &:nth-child(4) {
+            @include button-fade-in(400ms);
+            @include button-fade-out(0ms);
+          }
+        }
       }
 
       &:nth-child(2) {
         top: 18px;
         right: 18px;
+
+        .button {
+          &:nth-child(2) {
+            @include button-fade-in($delay: 0ms);
+            @include button-fade-out($delay: 400ms);
+          }
+
+          &:nth-child(3) {
+            @include button-fade-in($delay: 200ms);
+            @include button-fade-out($delay: 200ms);
+          }
+
+          &:nth-child(4) {
+            @include button-fade-in($delay: 400ms);
+            @include button-fade-out($delay: 0ms);
+          }
+        }
       }
 
       &:nth-child(3) {
