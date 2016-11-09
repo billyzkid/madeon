@@ -21,7 +21,7 @@ export default class App extends React.PureComponent {
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
 
     this.state = {
-      isShareButtonsVisible: true,
+      isShareButtonsVisible: false,
       isInfoButtonsVisible: true
     };
   }
@@ -39,16 +39,16 @@ export default class App extends React.PureComponent {
         </div>
         <div className="buttons">
           <section>
-            <Button label="Share" isActive={this.state.isShareButtonsVisible} onClick={this._onShareButtonClick} />
-            <Button icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
-            <Button icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
-            <Button icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
+            <Button isActive={this.state.isShareButtonsVisible} label="Share" onClick={this._onShareButtonClick} />
+            <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
+            <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
+            <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
           </section>
           <section>
-            <Button label="Info" isActive={this.state.isInfoButtonsVisible} onClick={this._onInfoButtonClick} />
-            <Button label="About" onClick={this._onAboutButtonClick} />
-            <Button icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
-            <Button icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
+            <Button isActive={this.state.isInfoButtonsVisible} label="Info" onClick={this._onInfoButtonClick} />
+            <Button isVisible={this.state.isInfoButtonsVisible} label="About" onClick={this._onAboutButtonClick} />
+            <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
+            <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
           </section>
           <section>
             <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
