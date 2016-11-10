@@ -1,46 +1,55 @@
-@import "../styles/includes.scss";
-
 .button {
   position: relative;
-  width: 50px;
-  height: 50px;
-  padding: 10px;
-  margin: 2px;
-  border: 2px solid black;
-  box-sizing: border-box;
-  text-align: center;
-  text-transform: uppercase;
-  font: inherit;
-  color: black;
-  background: white;
-  cursor: pointer;
-  transform: rotate(45deg);
+  width: $button-width;
+  height: $button-height;
+  padding: $button-padding;
+  margin: $button-margin;
+  border: $button-border;
+  cursor: $button-cursor;
+  color: $button-color;
+  background: $button-background;
+  transform: $button-transform;
 
-  &:hover,
-  &.active {
-    color: white;
-    background: black;
+  &:hover {
+    color: $button-hover-color;
+    background: $button-hover-background;
   }
 
-  &[icon]::before,
-  &[label]::after {
+  &.active {
+    color: $button-active-color;
+    background: $button-active-background;
+  }
+
+  &.active:hover {
+    color: $button-active-hover-color;
+    background: $button-active-hover-background;
+  }
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &::before {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg);
+    transform: $button-content-transform;
   }
 
-  &[icon]::before {
-    font: 14px FontAwesome;
-    content: attr(icon);
+  &[data-icon]::before {
+    content: attr(data-icon);
+    font: $button-icon-font;
+    letter-spacing: $button-icon-letter-spacing;
+    text-transform: $button-icon-text-transform;
   }
 
-  &[label]::after {
-    font-weight: bold;
-    font-size: 10px;
-    content: attr(label);
+  &[data-text]::before {
+    content: attr(data-text);
+    font: $button-text-font;
+    letter-spacing: $button-text-letter-spacing;
+    text-transform: $button-text-text-transform;
   }
 
-  @include button-fade-in();
-  @include button-fade-out();
+  @include button-transitions();
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "./Button";
 import { trace } from "../scripts/functions";
-import "./App.scss";
 
 export default class App extends React.PureComponent {
   constructor(props) {
@@ -39,14 +38,14 @@ export default class App extends React.PureComponent {
         </div>
         <div className="buttons">
           <section>
-            <Button isActive={this.state.isShareButtonsVisible} label="Share" onClick={this._onShareButtonClick} />
+            <Button isActive={this.state.isShareButtonsVisible} text="Share URL" onClick={this._onShareButtonClick} />
             <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
             <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
             <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
           </section>
           <section>
-            <Button isActive={this.state.isInfoButtonsVisible} label="Info" onClick={this._onInfoButtonClick} />
-            <Button isVisible={this.state.isInfoButtonsVisible} label="About" onClick={this._onAboutButtonClick} />
+            <Button isActive={this.state.isInfoButtonsVisible} text="Info" onClick={this._onInfoButtonClick} />
+            <Button isVisible={this.state.isInfoButtonsVisible} text="About" onClick={this._onAboutButtonClick} />
             <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
             <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
           </section>

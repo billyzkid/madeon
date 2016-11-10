@@ -1,13 +1,12 @@
 import React from "react";
 import { trace, getClassNames } from "../scripts/functions";
-import "./Button.scss";
 
 export default class Button extends React.PureComponent {
   static propTypes = {
     isActive: React.PropTypes.bool,
     isVisible: React.PropTypes.bool,
     icon: React.PropTypes.string,
-    label: React.PropTypes.string,
+    text: React.PropTypes.string,
     title: React.PropTypes.string,
     onClick: React.PropTypes.func
   }
@@ -27,9 +26,9 @@ export default class Button extends React.PureComponent {
 
     const classNames = getClassNames("button", {
       active: this.props.isActive,
-      visible: this.props.isVisible
+      hidden: !this.props.isVisible
     });
-
-    return <button type="button" className={classNames} icon={this.props.icon} label={this.props.label} title={this.props.title} onClick={this.props.onClick} />;
+    
+    return <button type="button" className={classNames} data-icon={this.props.icon} data-text={this.props.text} title={this.props.title} onClick={this.props.onClick} />;
   }
 }

@@ -1,0 +1,7 @@
+@mixin button-transitions($visible-delay: 0ms, $hidden-delay: 0ms) {
+  transition: color 200ms linear 0ms, background 200ms linear 0ms, opacity 200ms ease-in-out $visible-delay, visibility 0ms linear $visible-delay;
+
+  &.hidden {
+    transition: color 200ms linear 0ms, background 200ms linear 0ms, opacity 200ms ease-in-out $hidden-delay, visibility 0ms linear $hidden-delay + 200ms;
+  }
+}

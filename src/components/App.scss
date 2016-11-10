@@ -1,5 +1,3 @@
-@import "../styles/includes.scss";
-
 .app {
   position: relative;
   width: 100%;
@@ -13,6 +11,10 @@
     color: inherit;
     text-decoration: underline;
     cursor: pointer;
+  }
+
+  input, textarea, keygen, select, button {
+    font: inherit;
   }
 
   :focus {
@@ -46,18 +48,15 @@
 
         .button {
           &:nth-child(2) {
-            @include button-fade-in(0ms);
-            @include button-fade-out(400ms);
+            @include button-transitions(0ms, 400ms);
           }
 
           &:nth-child(3) {
-            @include button-fade-in(200ms);
-            @include button-fade-out(200ms);
+            @include button-transitions(200ms, 200ms);
           }
 
           &:nth-child(4) {
-            @include button-fade-in(400ms);
-            @include button-fade-out(0ms);
+            @include button-transitions(400ms, 0ms);
           }
         }
       }
@@ -68,18 +67,15 @@
 
         .button {
           &:nth-child(2) {
-            @include button-fade-in($delay: 0ms);
-            @include button-fade-out($delay: 400ms);
+            @include button-transitions(0ms, 400ms);
           }
 
           &:nth-child(3) {
-            @include button-fade-in($delay: 200ms);
-            @include button-fade-out($delay: 200ms);
+            @include button-transitions(200ms, 200ms);
           }
 
           &:nth-child(4) {
-            @include button-fade-in($delay: 400ms);
-            @include button-fade-out($delay: 0ms);
+            @include button-transitions(400ms, 0ms);
           }
         }
       }

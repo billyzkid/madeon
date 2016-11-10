@@ -1,0 +1,35 @@
+// Colors
+$white: #fff;
+$gray1: #ccc;
+$gray2: #999;
+$gray3: #666;
+$gray4: #333;
+$black: #000;
+
+// Fonts
+$text-font-family: "Lato", helvetica, arial, sans-serif;
+$icon-font-family: "FontAwesome";
+
+// Buttons
+$button-width: 50px;
+$button-height: 50px;
+$button-padding: 0px;
+$button-margin: 2px;
+$button-border: 2px solid $gray4;
+$button-cursor: pointer;
+$button-icon-font: 14px $icon-font-family;
+$button-icon-letter-spacing: 0px;
+$button-icon-text-transform: none;
+$button-text-font: bold 10px $text-font-family;
+$button-text-letter-spacing: 2px;
+$button-text-text-transform: uppercase;
+$button-color: $gray4;
+$button-background: $gray2;
+$button-hover-color: $gray2;
+$button-hover-background: $gray4;
+$button-active-color: $gray2;
+$button-active-background: $gray4;
+$button-active-hover-color: $gray2;
+$button-active-hover-background: $gray4;
+$button-transform: rotate(45deg);
+$button-content-transform: translate(-50%, -50%) rotate(-45deg);
