@@ -60,18 +60,16 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
         top: 18px;
         left: 18px;
 
-        .button {
-          &:nth-child(2) {
-            @include button-transitions(0ms, 400ms);
-          }
+        .button:nth-child(2) {
+          @include button-transitions(0ms, 400ms);
+        }
 
-          &:nth-child(3) {
-            @include button-transitions(200ms, 200ms);
-          }
+        .button:nth-child(3) {
+          @include button-transitions(200ms, 200ms);
+        }
 
-          &:nth-child(4) {
-            @include button-transitions(400ms, 0ms);
-          }
+        .button:nth-child(4) {
+          @include button-transitions(400ms, 0ms);
         }
       }
 
@@ -79,24 +77,26 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
         top: 18px;
         right: 18px;
 
-        .button {
-          &:nth-child(2) {
-            @include button-transitions(0ms, 400ms);
-          }
+        .button:nth-child(2) {
+          @include button-transitions(0ms, 400ms);
+        }
 
-          &:nth-child(3) {
-            @include button-transitions(200ms, 200ms);
-          }
+        .button:nth-child(3) {
+          @include button-transitions(200ms, 200ms);
+        }
 
-          &:nth-child(4) {
-            @include button-transitions(400ms, 0ms);
-          }
+        .button:nth-child(4) {
+          @include button-transitions(400ms, 0ms);
         }
       }
 
       &:nth-child(3) {
         bottom: 18px;
         left: 18px;
+
+        .button:nth-child(2) {
+          position: absolute;
+        }
       }
 
       &:nth-child(4) {
