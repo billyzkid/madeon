@@ -41,6 +41,7 @@
     content: attr(data-icon);
     font: $button-icon-font;
     letter-spacing: $button-icon-letter-spacing;
+    padding-left: $button-icon-letter-spacing;
     text-transform: $button-icon-text-transform;
   }
 
@@ -48,6 +49,7 @@
     content: attr(data-text);
     font: $button-text-font;
     letter-spacing: $button-text-letter-spacing;
+    padding-left: $button-text-letter-spacing;
     text-transform: $button-text-text-transform;
   }
 
