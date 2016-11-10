@@ -1,14 +1,26 @@
 @import "styles/variables";
 @import "styles/mixins";
-@import "themes/dark";
 
-#madeon {
+#madeon1 {
   position: absolute;
   top: 0px;
   bottom: 0px;
   left: 0px;
+  right: 50%;
+
+  @import "themes/dark";
+  @import "components/App";
+  @import "components/Button";
+}
+
+#madeon2 {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 50%;
   right: 0px;
 
+  @import "themes/light";
   @import "components/App";
   @import "components/Button";
 }

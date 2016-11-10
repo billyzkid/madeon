@@ -20,8 +20,9 @@ export default class App extends React.PureComponent {
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
 
     this.state = {
-      isInfoButtonsVisible: false,
-      isShareButtonsVisible: false
+      isShareButtonsVisible: false,
+      isInfoButtonsVisible: true,
+      isPlaying: true
     };
   }
 
@@ -50,11 +51,11 @@ export default class App extends React.PureComponent {
             <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
           </section>
           <section>
-            <Button icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
-            <Button icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
+            <Button isVisible={!this.state.isPlaying} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
+            <Button isVisible={this.state.isPlaying} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
           </section>
           <section>
-            <Button icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+            <Button isVisible={this.state.isPlaying} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
           </section>
         </div>
       </div>
