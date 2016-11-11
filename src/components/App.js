@@ -106,13 +106,16 @@ export default class App extends React.PureComponent {
 
   _onPlayButtonClick(event) {
     trace(this, this._onPlayButtonClick, event);
+    this.setState({ isPlaying: true });
   }
 
   _onPauseButtonClick(event) {
     trace(this, this._onPauseButtonClick, event);
+    this.setState({ isPlaying: false });
   }
 
   _onStopButtonClick(event) {
     trace(this, this._onStopButtonClick, event);
+    this.setState({ isPlaying: false });
   }
 }
