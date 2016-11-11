@@ -1,8 +1,13 @@
 import React from "react";
 import Button from "./Button";
-import { trace } from "../scripts/functions";
+import { trace, getClassNames } from "../scripts/functions";
+import "./App.scss";
 
 export default class App extends React.PureComponent {
+  static propTypes = {
+    theme: React.PropTypes.string
+  }
+
   constructor(props) {
     super(props);
     trace(this, this.constructor, props);
@@ -20,8 +25,9 @@ export default class App extends React.PureComponent {
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
 
     this.state = {
+      theme: props.theme,
       isShareButtonsVisible: false,
-      isInfoButtonsVisible: true,
+      isInfoButtonsVisible: false,
       isPlaying: true
     };
   }
@@ -29,8 +35,10 @@ export default class App extends React.PureComponent {
   render() {
     trace(this, this.render);
 
+    const classNames = getClassNames("app", this.state.theme);
+
     return (
-      <div className="app">
+      <div className={classNames}>
         <div className="header">
           <a href="http://madeon.fr" target="_blank">Madeon's Adventure Machine</a>
         </div>
@@ -39,7 +47,7 @@ export default class App extends React.PureComponent {
         </div>
         <div className="buttons">
           <section>
-            <Button isActive={this.state.isShareButtonsVisible} text="Share URL" onClick={this._onShareButtonClick} />
+            <Button isActive={this.state.isShareButtonsVisible} text="Share" onClick={this._onShareButtonClick} />
             <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
             <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
             <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />

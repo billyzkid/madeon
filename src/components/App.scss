@@ -1,23 +1,14 @@
-$app-font-weight: normal !default;
-$app-font-size: 16px !default;
-$app-font-family: $text-font-family !default;
-$app-font: $app-font-weight $app-font-size $app-font-family !default;
-$app-color: #333 !default;
-$app-background-color: #999 !default;
-$app-background: $app-background-color !default;
-$app-border-width: 2px !default;
-$app-border-style: solid !default;
-$app-border-color: #333 !default;
-$app-border: $app-border-width $app-border-style $app-border-color !default;
+@import "../styles/variables";
+@import "../styles/mixins";
 
 .app {
   position: relative;
   width: 100%;
   height: 100%;
-  font: $app-font;
-  color: $app-color;
-  background: $app-background;
-  border: $app-border;
+  font: 16px $text-font-family;
+  color: #333;
+  background: #999;
+  border: 2px solid #333;
   box-sizing: border-box;
   overflow: hidden;
 
@@ -25,10 +16,6 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
     color: inherit;
     text-decoration: underline;
     cursor: pointer;
-  }
-
-  input, textarea, keygen, select, button {
-    font: inherit;
   }
 
   :focus {
@@ -60,16 +47,18 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
         top: 18px;
         left: 18px;
 
-        .button:nth-child(2) {
-          @include button-transitions(0ms, 400ms);
-        }
+        button {
+          &:nth-child(2) {
+            @include button-transitions(0ms, 400ms);
+          }
 
-        .button:nth-child(3) {
-          @include button-transitions(200ms, 200ms);
-        }
+          &:nth-child(3) {
+            @include button-transitions(200ms, 200ms);
+          }
 
-        .button:nth-child(4) {
-          @include button-transitions(400ms, 0ms);
+          &:nth-child(4) {
+            @include button-transitions(400ms, 0ms);
+          }
         }
       }
 
@@ -77,16 +66,18 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
         top: 18px;
         right: 18px;
 
-        .button:nth-child(2) {
-          @include button-transitions(0ms, 400ms);
-        }
+        button {
+          &:nth-child(2) {
+            @include button-transitions(0ms, 400ms);
+          }
 
-        .button:nth-child(3) {
-          @include button-transitions(200ms, 200ms);
-        }
+          &:nth-child(3) {
+            @include button-transitions(200ms, 200ms);
+          }
 
-        .button:nth-child(4) {
-          @include button-transitions(400ms, 0ms);
+          &:nth-child(4) {
+            @include button-transitions(400ms, 0ms);
+          }
         }
       }
 
@@ -94,8 +85,10 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
         bottom: 18px;
         left: 18px;
 
-        .button:nth-child(2) {
-          position: absolute;
+        button {
+          &:nth-child(2) {
+            position: absolute;
+          }
         }
       }
 
@@ -105,4 +98,16 @@ $app-border: $app-border-width $app-border-style $app-border-color !default;
       }
     }
   }
+}
+
+.app.dark {
+  color: #fff;
+  background-color: #000;
+  border-color: #fff;
+}
+
+.app.light {
+  color: #000;
+  background-color: #fff;
+  border-color: #000;
 }

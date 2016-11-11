@@ -28,6 +28,8 @@ export function getClassNames() {
       }
     }
   }
-
-  return classNames.join(" ");
+  
+  if (classNames.length > 0) {
+    return classNames.join(" ");
+  }
 }

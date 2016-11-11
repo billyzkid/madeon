@@ -1,79 +1,23 @@
-$button-width: 50px !default;
-$button-height: 50px !default;
-$button-padding: 0px !default;
-$button-margin: 12px !default;
-$button-color: #333 !default;
-$button-background-color: #999 !default;
-$button-background: $button-background-color !default;
-$button-border-width: 2px !default;
-$button-border-style: solid !default;
-$button-border-color: #333 !default;
-$button-border: $button-border-width $button-border-style $button-border-color !default;
-$button-hover-color: $button-background-color !default;
-$button-hover-background-color: $button-color !default;
-$button-hover-background: $button-hover-background-color !default;
-$button-hover-border-width: $button-border-width !default;
-$button-hover-border-style: $button-border-style !default;
-$button-hover-border-color: $button-border-color !default;
-$button-hover-border: $button-hover-border-width $button-hover-border-style $button-hover-border-color !default;
-$button-active-color: $button-background-color !default;
-$button-active-background-color: $button-color !default;
-$button-active-background: $button-active-background-color !default;
-$button-active-border-width: $button-border-width !default;
-$button-active-border-style: $button-border-style !default;
-$button-active-border-color: $button-border-color !default;
-$button-active-border: $button-active-border-width $button-active-border-style $button-active-border-color !default;
-$button-active-hover-color: $button-background-color !default;
-$button-active-hover-background-color: $button-color !default;
-$button-active-hover-background: $button-active-hover-background-color !default;
-$button-active-hover-border-width: $button-border-width !default;
-$button-active-hover-border-style: $button-border-style !default;
-$button-active-hover-border-color: $button-border-color !default;
-$button-active-hover-border: $button-active-hover-border-width $button-active-hover-border-style $button-active-hover-border-color !default;
-$button-cursor: pointer !default;
-$button-transform: rotate(45deg) !default;
-$button-content-transform: translate(-50%, -50%) rotate(-45deg) !default;
-$button-icon-font-weight: normal !default;
-$button-icon-font-size: 14px !default;
-$button-icon-font-family: $icon-font-family !default;
-$button-icon-font: $button-icon-font-weight $button-icon-font-size $button-icon-font-family !default;
-$button-icon-letter-spacing: 0px !default;
-$button-icon-text-transform: none !default;
-$button-text-font-weight: bold !default;
-$button-text-font-size: 10px !default;
-$button-text-font-family: $text-font-family !default;
-$button-text-font: $button-text-font-weight $button-text-font-size $button-text-font-family !default;
-$button-text-letter-spacing: 2px !default;
-$button-text-text-transform: uppercase !default;
+@import "../styles/variables";
+@import "../styles/mixins";
 
-.button {
+.app button {
   position: relative;
-  width: $button-width;
-  height: $button-height;
-  padding: $button-padding;
-  margin: $button-margin;
-  color: $button-color;
-  background: $button-background;
-  border: $button-border;
-  cursor: $button-cursor;
-  transform: $button-transform;
-
-  &:hover {
-    color: $button-hover-color;
-    background: $button-hover-background;
-    border: $button-hover-border;
-  }
-
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+  margin: 12px;
+  font: inherit;
+  color: #333;
+  background: #999;
+  border: 2px solid #333;
+  cursor: pointer;
+  transform: rotate(45deg);
+  
+  &:hover,
   &.active {
-    color: $button-active-color;
-    background: $button-active-background;
-    border: $button-active-border;
-  }
-
-  &.active:hover {
-    color: $button-active-hover-color;
-    background: $button-active-hover-background;
-    border: $button-active-hover-border;
+    color: #999;
+    background: #333;
   }
 
   &.hidden {
@@ -85,24 +29,45 @@ $button-text-text-transform: uppercase !default;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: $button-content-transform;
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 
   &[data-icon]::before {
     content: attr(data-icon);
-    font: $button-icon-font;
-    letter-spacing: $button-icon-letter-spacing;
-    padding-left: $button-icon-letter-spacing;
-    text-transform: $button-icon-text-transform;
+    font: 14px $icon-font-family;
   }
 
   &[data-text]::before {
     content: attr(data-text);
-    font: $button-text-font;
-    letter-spacing: $button-text-letter-spacing;
-    padding-left: $button-text-letter-spacing;
-    text-transform: $button-text-text-transform;
+    font: bold 10px $text-font-family;
+    letter-spacing: 2px;
+    padding-left: 2px;
+    text-transform: uppercase;
   }
 
   @include button-transitions();
+}
+
+.app.dark button {
+  color: #fff;
+  background-color: #000;
+  border-color: #fff;
+
+  &:hover,
+  &.active {
+    color: #000;
+    background-color: #fff;
+  }
+}
+
+.app.light button {
+  color: #000;
+  background-color: #fff;
+  border-color: #000;
+
+  &:hover,
+  &.active {
+    color: #fff;
+    background-color: #000;
+  }
 }

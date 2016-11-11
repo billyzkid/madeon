@@ -1,5 +1,6 @@
 import React from "react";
 import { trace, getClassNames } from "../scripts/functions";
+import "./Button.scss";
 
 export default class Button extends React.PureComponent {
   static propTypes = {
@@ -24,7 +25,7 @@ export default class Button extends React.PureComponent {
   render() {
     trace(this, this.render);
 
-    const classNames = getClassNames("button", {
+    const classNames = getClassNames({
       active: this.props.isActive,
       hidden: !this.props.isVisible
     });
