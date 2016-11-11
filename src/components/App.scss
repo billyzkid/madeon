@@ -49,15 +49,15 @@
 
         button {
           &:nth-child(2) {
-            @include button-transitions(0ms, 400ms);
+            @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
           }
 
           &:nth-child(3) {
-            @include button-transitions(200ms, 200ms);
+            @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
           }
 
           &:nth-child(4) {
-            @include button-transitions(400ms, 0ms);
+            @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
           }
         }
       }
@@ -68,15 +68,15 @@
 
         button {
           &:nth-child(2) {
-            @include button-transitions(0ms, 400ms);
+            @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
           }
 
           &:nth-child(3) {
-            @include button-transitions(200ms, 200ms);
+            @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
           }
 
           &:nth-child(4) {
-            @include button-transitions(400ms, 0ms);
+            @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
           }
         }
       }

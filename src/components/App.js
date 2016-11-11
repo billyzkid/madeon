@@ -72,6 +72,7 @@ export default class App extends React.PureComponent {
 
   _onShareButtonClick(event) {
     trace(this, this._onShareButtonClick, event);
+    this.setState({ isShareButtonsVisible: !this.state.isShareButtonsVisible });
   }
 
   _onUrlButtonClick(event) {
@@ -88,6 +89,7 @@ export default class App extends React.PureComponent {
 
   _onInfoButtonClick(event) {
     trace(this, this._onInfoButtonClick, event);
+    this.setState({ isInfoButtonsVisible: !this.state.isInfoButtonsVisible });
   }
 
   _onAboutButtonClick(event) {
