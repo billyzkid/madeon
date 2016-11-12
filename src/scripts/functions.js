@@ -12,17 +12,17 @@ export function trace(instance, method, ...args) {
 }
 
 export function getClassNames(...args) {
-  var array = [];
+  let array = [];
 
-  for (var i = 0, l = args.length; i < l; i++) {
-    var arg = args[i];
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
     if (arg) {
       if (Array.isArray(arg)) {
         array.push(getClassNames.apply(null, arg));
       } else if (typeof arg === "string") {
         array.push(arg);
       } else if (typeof arg === "object") {
-        for (var key in arg) {
+        for (const key in arg) {
           if (arg.hasOwnProperty(key) && arg[key]) {
             array.push(key);
           }
@@ -32,10 +32,10 @@ export function getClassNames(...args) {
   }
   
   // strip whitespace
-  array = array.join(" ").match(/\S+/g) || [];
+  array = array.join(" ").match(/\S+/g);
   
   // remove duplicates
-  array = array.filter((value, index, self) => self.indexOf(value) === index);
+  array = [...new Set(array)];
 
   if (array.length > 0) {
     return array.join(" ");

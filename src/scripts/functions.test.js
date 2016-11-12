@@ -61,6 +61,21 @@ describe("getClassNames", () => {
   });
 
   test("returns undefined", () => {
+    const classNames = getClassNames();
+    expect(classNames).toBeUndefined();
+  });
+
+  test("returns undefined", () => {
+    const classNames = getClassNames(null);
+    expect(classNames).toBeUndefined();
+  });
+
+  test("returns undefined", () => {
+    const classNames = getClassNames(undefined);
+    expect(classNames).toBeUndefined();
+  });
+
+  test("returns undefined", () => {
     const classNames = getClassNames("", { "class1": false }, []);
     expect(classNames).toBeUndefined();
   });
