@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "./Button";
+import { PlayerState } from "../scripts/constants";
 import { trace, getClassNames } from "../scripts/functions";
 import "./App.scss";
 
@@ -28,7 +29,7 @@ export default class App extends React.PureComponent {
       theme: props.theme,
       isShareButtonsVisible: false,
       isInfoButtonsVisible: false,
-      isPlaying: true
+      playerState: PlayerState.stopped
     };
   }
 
@@ -59,16 +60,22 @@ export default class App extends React.PureComponent {
             <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
           </section>
           <section>
-            <Button isVisible={!this.state.isPlaying} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
-            <Button isVisible={this.state.isPlaying} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
+            {
+              this.state.playerState === PlayerState.paused ?
+                <Button isVisible={this.state.playerState === PlayerState.paused} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} /> :
+                <Button isVisible={this.state.playerState === PlayerState.playing} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
+            }
           </section>
           <section>
-            <Button isVisible={this.state.isPlaying} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+            <Button isVisible={this.state.playerState !== PlayerState.stopped} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
           </section>
         </div>
       </div>
     );
   }
+
+  //<Button isVisible={this.state.playerState === PlayerState.paused} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
+  //<Button isVisible={this.state.playerState === PlayerState.playing} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
 
   _onShareButtonClick(event) {
     trace(this, this._onShareButtonClick, event);
@@ -106,16 +113,16 @@ export default class App extends React.PureComponent {
 
   _onPlayButtonClick(event) {
     trace(this, this._onPlayButtonClick, event);
-    this.setState({ isPlaying: true });
+    this.setState({ playerState: PlayerState.playing });
   }
 
   _onPauseButtonClick(event) {
     trace(this, this._onPauseButtonClick, event);
-    this.setState({ isPlaying: false });
+    this.setState({ playerState: PlayerState.paused });
   }
 
   _onStopButtonClick(event) {
     trace(this, this._onStopButtonClick, event);
-    this.setState({ isPlaying: false });
+    this.setState({ playerState: PlayerState.stopped });
   }
 }

@@ -37,6 +37,10 @@
     font: 14px $icon-font-family;
   }
 
+  &[data-icon="\f04b"]::before {
+    padding-left: 2px;
+  }
+
   &[data-text]::before {
     content: attr(data-text);
     font: bold 10px $text-font-family;

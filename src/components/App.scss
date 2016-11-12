@@ -27,6 +27,7 @@
     position: absolute;
     top: 35px;
     left: 50%;
+    text-align: center;
     transform: translate(-50%, 0%);
   }
 
@@ -34,6 +35,7 @@
     position: absolute;
     bottom: 10px;
     left: 50%;
+    text-align: center;
     transform: translate(-50%, 0%);
   }
 
@@ -84,12 +86,6 @@
       &:nth-child(3) {
         bottom: 18px;
         left: 18px;
-
-        button {
-          &:nth-child(2) {
-            position: absolute;
-          }
-        }
       }
 
       &:nth-child(4) {
