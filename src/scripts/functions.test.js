@@ -71,7 +71,7 @@ describe("getClassNames", () => {
   });
 
   test("returns undefined", () => {
-    const classNames = getClassNames(undefined);
+    const classNames = getClassNames(" ");
     expect(classNames).toBeUndefined();
   });
 
