@@ -1,35 +1,43 @@
 export function trace(instance, method, ...args) {
-  if (instance.constructor === method) {
-    console.log("%s.constructor", instance.constructor.name, ...args);
+  if (instance.name) {
+    // static method
+    console.log(instance.name + "::" + method.name, ...args);
+  } else if (instance.constructor !== method) {
+    // instance method
+    console.log(instance.constructor.name + "." + method.name.replace(/^bound\s/, ""), ...args);
   } else {
-    console.log("%s.%s", instance.constructor.name, method.name.replace(/^bound\s/, ""), ...args);
+    // class constructor
+    console.log(instance.constructor.name + ".constructor", ...args);
   }
 }
 
-export function getClassNames() {
-  var classNames = [];
+export function getClassNames(...args) {
+  var array = [];
 
-  for (var i = 0, l = arguments.length; i < l; i++) {
-    var arg = arguments[i];
+  for (var i = 0, l = args.length; i < l; i++) {
+    var arg = args[i];
     if (arg) {
       if (Array.isArray(arg)) {
-        classNames.push(getClassNames.apply(null, arg));
-      } else {
-        var argType = typeof arg;
-        if (argType === "string" || argType === "number") {
-          classNames.push(arg);
-        } else if (argType === "object") {
-          for (var key in arg) {
-            if (arg.hasOwnProperty(key) && arg[key]) {
-              classNames.push(key);
-            }
+        array.push(getClassNames.apply(null, arg));
+      } else if (typeof arg === "string") {
+        array.push(arg);
+      } else if (typeof arg === "object") {
+        for (var key in arg) {
+          if (arg.hasOwnProperty(key) && arg[key]) {
+            array.push(key);
           }
         }
       }
     }
   }
   
-  if (classNames.length > 0) {
-    return classNames.join(" ");
+  // strip whitespace
+  array = array.join(" ").match(/\S+/g) || [];
+  
+  // remove duplicates
+  array = array.filter((value, index, self) => self.indexOf(value) === index);
+
+  if (array.length > 0) {
+    return array.join(" ");
   }
 }
