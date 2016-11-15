@@ -60,11 +60,7 @@ export default class App extends React.PureComponent {
             <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
           </section>
           <section>
-            {
-              this.state.playerState === PlayerState.paused ?
-                <Button isVisible={this.state.playerState === PlayerState.paused} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} /> :
-                <Button isVisible={this.state.playerState === PlayerState.playing} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
-            }
+            {this._renderPlayPauseButton()}
           </section>
           <section>
             <Button isVisible={this.state.playerState !== PlayerState.stopped} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
@@ -74,8 +70,17 @@ export default class App extends React.PureComponent {
     );
   }
 
-  //<Button isVisible={this.state.playerState === PlayerState.paused} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />
-  //<Button isVisible={this.state.playerState === PlayerState.playing} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />
+  _renderPlayPauseButton() {
+    if (this.state.playerState === PlayerState.paused) {
+      return <Button ref="playPauseButton" isVisible={true} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />;
+    } else if (this.state.playerState === PlayerState.playing) {
+      return <Button ref="playPauseButton" isVisible={true} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />;
+    } else if (this.refs.playPauseButton) {
+      return <Button ref="playPauseButton" {...this.refs.playPauseButton.props} isVisible={false} />;
+    } else {
+      return <Button ref="playPauseButton" isVisible={false} />;
+    }
+  }
 
   _onShareButtonClick(event) {
     trace(this, this._onShareButtonClick, event);
