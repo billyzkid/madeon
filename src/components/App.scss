@@ -28,10 +28,18 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease-out 0ms, visibility 0ms linear 500ms;
 
     img {
       width: 100px;
       animation: spin 2s linear infinite;
+    }
+
+    span {
+      display: block;
+      text-align: center;
     }
 
     @keyframes spin {
@@ -45,76 +53,94 @@
     }
   }
 
-  .header {
-    position: absolute;
-    top: 35px;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, 0%);
-  }
+  .chrome {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease-out 0ms, visibility 0ms linear 500ms;
 
-  .footer {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, 0%);
-  }
-
-  .buttons {
-    section {
+    .header {
       position: absolute;
-      display: flex;
-      flex-flow: column;
+      top: 35px;
+      left: 50%;
+      text-align: center;
+      transform: translate(-50%, 0%);
+    }
 
-      &:nth-child(1) {
-        top: 18px;
-        left: 18px;
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      text-align: center;
+      transform: translate(-50%, 0%);
+    }
 
-        button {
-          &:nth-child(2) {
-            @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
-          }
+    .buttons {
+      section {
+        position: absolute;
+        display: flex;
+        flex-flow: column;
 
-          &:nth-child(3) {
-            @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
-          }
+        &:nth-child(1) {
+          top: 18px;
+          left: 18px;
 
-          &:nth-child(4) {
-            @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
+          button {
+            &:nth-child(2) {
+              @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
+            }
+
+            &:nth-child(3) {
+              @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
+            }
+
+            &:nth-child(4) {
+              @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
+            }
           }
         }
-      }
 
-      &:nth-child(2) {
-        top: 18px;
-        right: 18px;
+        &:nth-child(2) {
+          top: 18px;
+          right: 18px;
 
-        button {
-          &:nth-child(2) {
-            @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
-          }
+          button {
+            &:nth-child(2) {
+              @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
+            }
 
-          &:nth-child(3) {
-            @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
-          }
+            &:nth-child(3) {
+              @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
+            }
 
-          &:nth-child(4) {
-            @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
+            &:nth-child(4) {
+              @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
+            }
           }
         }
-      }
 
-      &:nth-child(3) {
-        bottom: 18px;
-        left: 18px;
-      }
+        &:nth-child(3) {
+          bottom: 18px;
+          left: 18px;
+        }
 
-      &:nth-child(4) {
-        bottom: 18px;
-        right: 18px;
+        &:nth-child(4) {
+          bottom: 18px;
+          right: 18px;
+        }
       }
     }
+  }
+
+  &.loading .splash {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
+  }
+
+  &.loaded .chrome {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
   }
 }
 

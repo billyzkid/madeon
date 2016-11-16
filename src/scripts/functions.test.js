@@ -1,4 +1,4 @@
-import { trace, getClassNames, delay } from "./functions";
+import { trace, getClassNames, delay, delayImmediate } from "./functions";
 
 describe("trace", () => {
   beforeEach(() => {
@@ -76,5 +76,22 @@ describe("delay", () => {
     expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(setTimeout.mock.calls[0][0]).toBeInstanceOf(Function);
     expect(setTimeout.mock.calls[0][1]).toBe(1000);
+  });
+});
+
+describe("delayImmediate", () => {
+  beforeEach(() => {
+    window.setImmediate = jest.fn();
+  });
+
+  test("returns promise", () => {
+    const result = delayImmediate();
+    expect(result).toBeInstanceOf(Promise);
+  });
+
+  test("calls setImmediate", () => {
+    const result = delayImmediate(1000);
+    expect(setImmediate).toHaveBeenCalledTimes(1);
+    expect(setImmediate.mock.calls[0][0]).toBeInstanceOf(Function);
   });
 });

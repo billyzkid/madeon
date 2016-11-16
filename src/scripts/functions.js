@@ -47,3 +47,9 @@ export function delay(time) {
     setTimeout(resolve, time);
   });
 }
+
+export function delayImmediate() {
+  return new Promise((resolve, reject) => {
+    setImmediate(resolve);
+  });
+}

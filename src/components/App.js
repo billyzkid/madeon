@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 import reactImage from "../images/react.svg";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
-import { trace, getClassNames, delay } from "../scripts/functions";
+import { trace, getClassNames, delay, delayImmediate } from "../scripts/functions";
 import "./App.scss";
 
 export default class App extends React.PureComponent {
@@ -42,9 +42,9 @@ export default class App extends React.PureComponent {
   componentDidMount() {
     trace(this, this.componentDidMount);
 
-    delay(3000).then(() => {
+    delayImmediate().then(() => {
       this.setState({ appState: AppState.loading });
-    }).then(() => delay(1000)).then(() => {
+    }).then(() => delay(2000)).then(() => {
       this.setState({ appState: AppState.loaded });
     }).catch((error) => {
       this.setState({ appState: AppState.failed });
@@ -75,32 +75,35 @@ export default class App extends React.PureComponent {
       <div className={classNames}>
         <div className="splash">
           <img src={reactImage} alt="Loading..." />
+          <span>Loading...</span>
         </div>
-        <div className="header">
-          <a href="http://madeon.fr" target="_blank">Madeon's Adventure Machine</a>
-        </div>
-        <div className="footer">
-          <a href="http://wmas.it" target="_blank">We Made This</a>
-        </div>
-        <div className="buttons">
-          <section>
-            <Button isActive={this.state.isShareButtonsVisible} text="Share" onClick={this._onShareButtonClick} />
-            <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
-            <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
-            <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
-          </section>
-          <section>
-            <Button isActive={this.state.isInfoButtonsVisible} text="Info" onClick={this._onInfoButtonClick} />
-            <Button isVisible={this.state.isInfoButtonsVisible} text="About" onClick={this._onAboutButtonClick} />
-            <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
-            <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
-          </section>
-          <section>
-            {playPauseButton}
-          </section>
-          <section>
-            <Button isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
-          </section>
+        <div className="chrome">
+          <div className="header">
+            <a href="http://madeon.fr" target="_blank">Madeon's Adventure Machine</a>
+          </div>
+          <div className="footer">
+            <a href="http://wmas.it" target="_blank">We Made This</a>
+          </div>
+          <div className="buttons">
+            <section>
+              <Button isActive={this.state.isShareButtonsVisible} text="Share" onClick={this._onShareButtonClick} />
+              <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf064;" title="Share URL" onClick={this._onUrlButtonClick} />
+              <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf099;" title="Share on Twitter" onClick={this._onTwitterButtonClick} />
+              <Button isVisible={this.state.isShareButtonsVisible} icon="&#xf09a;" title="Share on Facebook" onClick={this._onFacebookButtonClick} />
+            </section>
+            <section>
+              <Button isActive={this.state.isInfoButtonsVisible} text="Info" onClick={this._onInfoButtonClick} />
+              <Button isVisible={this.state.isInfoButtonsVisible} text="About" onClick={this._onAboutButtonClick} />
+              <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf287;" title="Connect your Launchpad" onClick={this._onLaunchpadButtonClick} />
+              <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
+            </section>
+            <section>
+              {playPauseButton}
+            </section>
+            <section>
+              <Button isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+            </section>
+          </div>
         </div>
       </div>
     );
