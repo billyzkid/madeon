@@ -1,12 +1,16 @@
 import React from "react";
 import Button from "./Button";
-import { PlayerState } from "../scripts/constants";
-import { trace, getClassNames } from "../scripts/functions";
+import { AppTheme, AppState, PlayerState } from "../scripts/constants";
+import { trace, getClassNames, delay } from "../scripts/functions";
 import "./App.scss";
 
 export default class App extends React.PureComponent {
   static propTypes = {
     theme: React.PropTypes.string
+  }
+
+  static defaultProps = {
+    theme: AppTheme.none
   }
 
   constructor(props) {
@@ -27,16 +31,44 @@ export default class App extends React.PureComponent {
 
     this.state = {
       theme: props.theme,
+      appState: AppState.default,
+      playerState: PlayerState.default,
       isShareButtonsVisible: false,
-      isInfoButtonsVisible: false,
-      playerState: PlayerState.stopped
+      isInfoButtonsVisible: false
     };
+  }
+
+  componentDidMount() {
+    trace(this, this.componentDidMount);
+
+    delay(3000).then(() => {
+      this.setState({ appState: AppState.loading });
+    }).then(() => delay(1000)).then(() => {
+      this.setState({ appState: AppState.loaded });
+    }).catch((error) => {
+      this.setState({ appState: AppState.failed });
+    });
   }
 
   render() {
     trace(this, this.render);
 
-    const classNames = getClassNames("app", this.state.theme);
+    const classNames = getClassNames("app", {
+      [this.state.theme]: this.state.theme !== AppTheme.none,
+      [this.state.appState]: this.state.appState !== AppState.default
+    });
+
+    let playPauseButton;
+
+    if (this.state.playerState === PlayerState.paused) {
+      playPauseButton = <Button ref="playPauseButton" isVisible={true} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />;
+    } else if (this.state.playerState === PlayerState.playing) {
+      playPauseButton = <Button ref="playPauseButton" isVisible={true} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />;
+    } else if (this.refs.playPauseButton) {
+      playPauseButton = <Button ref="playPauseButton" {...this.refs.playPauseButton.props} isVisible={false} />;
+    } else {
+      playPauseButton = <Button ref="playPauseButton" isVisible={false} />;
+    }
 
     return (
       <div className={classNames}>
@@ -60,26 +92,14 @@ export default class App extends React.PureComponent {
             <Button isVisible={this.state.isInfoButtonsVisible} icon="&#xf128;" title="Help!" onClick={this._onHelpButtonClick} />
           </section>
           <section>
-            {this._renderPlayPauseButton()}
+            {playPauseButton}
           </section>
           <section>
-            <Button isVisible={this.state.playerState !== PlayerState.stopped} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
+            <Button isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} icon="&#xf04d;" title="Stop" onClick={this._onStopButtonClick} />
           </section>
         </div>
       </div>
     );
-  }
-
-  _renderPlayPauseButton() {
-    if (this.state.playerState === PlayerState.paused) {
-      return <Button ref="playPauseButton" isVisible={true} icon="&#xf04b;" title="Play" onClick={this._onPlayButtonClick} />;
-    } else if (this.state.playerState === PlayerState.playing) {
-      return <Button ref="playPauseButton" isVisible={true} icon="&#xf04c;" title="Pause" onClick={this._onPauseButtonClick} />;
-    } else if (this.refs.playPauseButton) {
-      return <Button ref="playPauseButton" {...this.refs.playPauseButton.props} isVisible={false} />;
-    } else {
-      return <Button ref="playPauseButton" isVisible={false} />;
-    }
   }
 
   _onShareButtonClick(event) {
@@ -128,6 +148,6 @@ export default class App extends React.PureComponent {
 
   _onStopButtonClick(event) {
     trace(this, this._onStopButtonClick, event);
-    this.setState({ playerState: PlayerState.stopped });
+    this.setState({ playerState: PlayerState.default });
   }
 }
