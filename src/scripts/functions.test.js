@@ -1,4 +1,4 @@
-import { trace, getClassNames, delay, delayImmediate } from "./functions";
+import { trace, getClassNames, delay } from "./functions";
 
 describe("trace", () => {
   beforeEach(() => {
@@ -64,34 +64,18 @@ describe("getClassNames", () => {
 describe("delay", () => {
   beforeEach(() => {
     window.setTimeout = jest.fn();
-  });
-
-  test("returns promise", () => {
-    const result = delay(1000);
-    expect(result).toBeInstanceOf(Promise);
-  });
-
-  test("calls setTimeout", () => {
-    const result = delay(1000);
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout.mock.calls[0][0]).toBeInstanceOf(Function);
-    expect(setTimeout.mock.calls[0][1]).toBe(1000);
-  });
-});
-
-describe("delayImmediate", () => {
-  beforeEach(() => {
     window.setImmediate = jest.fn();
   });
 
-  test("returns promise", () => {
-    const result = delayImmediate();
+  test("calls setTimeout with time argument", () => {
+    const result = delay(1000);
     expect(result).toBeInstanceOf(Promise);
+    expect(setTimeout).toHaveBeenCalledTimes(1);
   });
 
-  test("calls setImmediate", () => {
-    const result = delayImmediate(1000);
+  test("calls setImmediate without time argument", () => {
+    const result = delay();
+    expect(result).toBeInstanceOf(Promise);
     expect(setImmediate).toHaveBeenCalledTimes(1);
-    expect(setImmediate.mock.calls[0][0]).toBeInstanceOf(Function);
   });
 });

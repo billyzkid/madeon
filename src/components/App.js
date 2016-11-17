@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
-import { trace, getClassNames, delay, delayImmediate } from "../scripts/functions";
+import { trace, getClassNames, delay } from "../scripts/functions";
 import "./App.scss";
 
 export default class App extends React.PureComponent {
@@ -41,7 +41,7 @@ export default class App extends React.PureComponent {
   componentDidMount() {
     trace(this, this.componentDidMount);
 
-    delayImmediate().then(() => {
+    delay().then(() => {
       this.setState({ appState: AppState.loading });
     }).then(() => delay(2000)).then(() => {
       this.setState({ appState: AppState.loaded });

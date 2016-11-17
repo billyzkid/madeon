@@ -30,10 +30,10 @@ export function getClassNames(...args) {
       }
     }
   }
-  
+
   // strip whitespace
   array = array.join(" ").match(/\S+/g);
-  
+
   // remove duplicates
   array = [...new Set(array)];
 
@@ -44,12 +44,10 @@ export function getClassNames(...args) {
 
 export function delay(time) {
   return new Promise((resolve, reject) => {
-    setTimeout(resolve, time);
-  });
-}
-
-export function delayImmediate() {
-  return new Promise((resolve, reject) => {
-    setImmediate(resolve);
+    if (time !== undefined) {
+      setTimeout(resolve, time);
+    } else {
+      setImmediate(resolve);
+    }
   });
 }
