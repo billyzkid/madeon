@@ -24,22 +24,26 @@
   }
 
   .splash {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, -50%);
     transition: opacity 500ms ease-out 0ms, visibility 0ms linear 500ms;
 
-    img {
-      width: 100px;
-      animation: spin 2s linear infinite;
-    }
-
     span {
-      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
+      
+      &::before {
+        display: block;
+        content: "";
+        width: 100px;
+        height: 71px;
+        margin: auto;
+        background: url("../images/react.svg") center/contain no-repeat;
+        animation: spin 2s linear infinite;
+      }
     }
 
     @keyframes spin {
@@ -58,20 +62,64 @@
     visibility: hidden;
     transition: opacity 500ms ease-out 500ms, visibility 0ms linear 1000ms;
 
+    .background {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: url("../images/background.jpg") right bottom/cover no-repeat;
+    }
+
     .header {
       position: absolute;
       top: 35px;
       left: 50%;
-      text-align: center;
-      transform: translate(-50%, 0%);
+      transform: translateX(-50%);
+
+      a {
+        display: block;
+        width: 162px;
+        height: 48px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-indent: 100%;
+        text-align: center;
+        text-decoration: none;
+        background: url("../images/logo.png") center/contain no-repeat;
+      }
     }
 
     .footer {
       position: absolute;
       bottom: 10px;
       left: 50%;
+      transform: translateX(-50%);
       text-align: center;
-      transform: translate(-50%, 0%);
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      a {
+        display: block;
+        color: rgba(14, 34, 54, 0.61);
+        white-space: nowrap;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 10px;
+        letter-spacing: 1px;
+        padding-left: 1px;
+
+        &:hover {
+          color: #f8e9db;
+        }
+      }
     }
 
     .buttons {

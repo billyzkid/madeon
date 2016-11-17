@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "./Button";
-import reactImage from "../images/react.svg";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
 import { trace, getClassNames, delay, delayImmediate } from "../scripts/functions";
 import "./App.scss";
@@ -74,10 +73,10 @@ export default class App extends React.PureComponent {
     return (
       <div className={classNames}>
         <div className="splash">
-          <img src={reactImage} alt="Loading..." />
-          <span>Loading...</span>
+          <span>Loading</span>
         </div>
         <div className="chrome">
+          <div className="background" />
           <div className="header">
             <a href="http://madeon.fr" target="_blank">Madeon's Adventure Machine</a>
           </div>
