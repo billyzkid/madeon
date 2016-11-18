@@ -1,0 +1,9 @@
+@function negate($args) {
+  $result: ();
+
+	@each $arg in $args {
+		$result: append($result, -$arg);
+	}
+
+  @return $result;
+}

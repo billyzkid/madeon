@@ -5,7 +5,101 @@
   position: relative;
   width: 100%;
   height: 100%;
-  font: 16px $text-font-family;
+  color: #000;
+  background: #fff;
+
+  :focus {
+    outline: #4d90fe solid 1px;
+    outline-offset: -2px;
+  }
+
+  .splash {
+    visibility: hidden;
+
+    span {
+      @include position-center();
+    }
+  }
+
+  .chrome {
+    visibility: hidden;
+
+    .background {
+      @include position-cover();
+      background: #ccc;
+    }
+
+    .header {
+      @include position-center-top();
+      text-align: center;
+    }
+
+    .footer {
+      @include position-center-bottom();
+      text-align: center;
+    }
+
+    .buttons {
+      section {
+        display: flex;
+        visibility: hidden;
+
+        &:nth-child(1) {
+          @include position-top-left();
+          flex-flow: column;
+        }
+
+        &:nth-child(2) {
+          @include position-top-right();
+          flex-flow: column;
+        }
+
+        &:nth-child(3) {
+          @include position-bottom-left();
+          flex-flow: column-reverse;
+        }
+
+        &:nth-child(4) {
+          @include position-bottom-right();
+          flex-flow: column-reverse;
+        }
+
+        $button-margin: 1px 0 0;
+
+        button {
+          margin: $button-margin;
+        }
+
+        @include negative-margin($button-margin);
+      }
+    }
+  }
+
+  &.loading {
+    .splash {
+      visibility: visible;
+    }
+  }
+
+  &.loaded {
+    .chrome {
+      visibility: visible;
+
+      .buttons {
+        section {
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+/*
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font: 16px "Lato", helvetica, arial, sans-serif;
   color: #333;
   background: #999;
   border: 2px solid #333;
@@ -219,3 +313,12 @@
   background-color: #fff;
   border-color: #000;
 }
+
+@mixin button-transitions($visible-duration: 500ms, $visible-delay: 0ms, $hidden-duration: 500ms, $hidden-delay: 0ms) {
+  transition: all 200ms, opacity $visible-duration ease-in $visible-delay, visibility 0ms linear $visible-delay;
+
+  &.hidden {
+    transition: all 200ms, opacity $hidden-duration ease-out $hidden-delay, visibility 0ms linear $hidden-duration + $hidden-delay;
+  }
+}
+*/
