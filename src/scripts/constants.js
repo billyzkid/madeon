@@ -1,7 +1,6 @@
 export const AppTheme = {
   none: "none",
-  dark: "dark",
-  light: "light"
+  madeon: "madeon"
 }
 
 export const AppState = {

@@ -3,58 +3,27 @@
 .app button {
   display: flex;
   justify-content: center;
-  font: bold 10px/14px "Lato";
-  text-align: left;
-  text-transform: uppercase;
   color: #000;
   background: #ddd;
-  padding: 2px 6px;
-  border: 1px solid #000;
-
+  
   &.active {
-    color: #ddd;
-    background: #666;
-  }
-
-  &:hover {
-    color: #fff;
-    background: #000;
+    color: invert(#000);
+    background: invert(#ddd);
   }
 
   &.hidden {
     visibility: hidden;
   }
+}
 
-  &.url {
-    @include button-icon("\f064");
-  }
+.app.madeon button {
+  cursor: pointer;
 
-  &.twitter {
-    @include button-icon("\f099");
-  }
-
-  &.facebook {
-    @include button-icon("\f09a");
-  }
-
-  &.launchpad {
-    @include button-icon("\f287");
-  }
-
-  &.help {
-    @include button-icon("\f128");
-  }
-
-  &.play {
-    @include button-icon("\f04b");
-  }
-
-  &.pause {
-    @include button-icon("\f04c");
-  }
-
-  &.stop {
-    @include button-icon("\f04d");
+  span {
+    font: bold 9px/11px "Lato";
+    letter-spacing: 2px;
+    padding-left: 2px;
+    text-transform: uppercase;
   }
 }
 

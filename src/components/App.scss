@@ -7,11 +7,7 @@
   height: 100%;
   color: #000;
   background: #fff;
-
-  :focus {
-    outline: #4d90fe solid 1px;
-    outline-offset: -2px;
-  }
+  //overflow: hidden;
 
   .splash {
     visibility: hidden;
@@ -64,13 +60,10 @@
           flex-flow: column-reverse;
         }
 
-        $button-margin: 1px 0 0;
-
         button {
-          margin: $button-margin;
+          width: 75px;
+          height: 25px;
         }
-
-        @include negative-margin($button-margin);
       }
     }
   }
@@ -88,6 +81,83 @@
       .buttons {
         section {
           visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+.app.madeon {
+  font: 16px "Lato";
+  color: #fff;
+
+  :focus {
+    outline: #4d90fe solid 1px;
+    outline-offset: -1px;
+  }
+
+  .chrome {
+    .background {
+      background: url("../images/background.jpg") right bottom/cover no-repeat;
+    }
+
+    .buttons {
+      section {
+        $button-margin: 30px 0 0;
+        @include negative-margin($button-margin);
+
+        button {
+          width: 44px;
+          height: 44px;
+          padding: 0;
+          border: 0;
+          margin: $button-margin;
+          color: #f8e9db;
+          background: rgba(14, 34, 54, 0.61);
+          transform: rotate(45deg);
+
+          &.active,
+          &:hover {
+            color: #0e2236;
+            background: #f8e9db;
+          }
+
+          &.url {
+            @include button-icon("\f064");
+          }
+
+          &.twitter {
+            @include button-icon("\f099");
+          }
+
+          &.facebook {
+            @include button-icon("\f09a");
+          }
+
+          &.launchpad {
+            @include button-icon("\f287");
+          }
+
+          &.help {
+            @include button-icon("\f128");
+          }
+
+          &.play {
+            @include button-icon("\f04b");
+          }
+
+          &.pause {
+            @include button-icon("\f04c");
+          }
+
+          &.stop {
+            @include button-icon("\f04d");
+          }
+
+          &::before,
+          span {
+            transform: rotate(-45deg);
+          }
         }
       }
     }
