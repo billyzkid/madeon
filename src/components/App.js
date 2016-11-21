@@ -10,7 +10,7 @@ export default class App extends React.PureComponent {
   }
 
   static defaultProps = {
-    theme: AppTheme.none
+    theme: AppTheme.default
   }
 
   constructor(props) {

@@ -1,111 +1,15 @@
-@import "../styles/mixins";
-
 .app button {
+  display: flex;
+  justify-content: center;
   font: inherit;
-  font-size: 0.8em;
-  color: inherit;
+  color: #000;
   background: #ddd;
 
   &.active {
-    background: #aaa;
+    background: #bbb;
   }
-  
+
   &:hover {
-    color: #fff;
-    background: #000;
-  }
-
-  &.hidden {
-    visibility: hidden;
+    background: #999;
   }
 }
-
-.app.madeon button {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-
-  span {
-    font: bold 9px/11px "Lato";
-    letter-spacing: 2px;
-    padding-left: 2px;
-    text-transform: uppercase;
-  }
-}
-
-/*
-.app button {
-  position: relative;
-  width: 50px;
-  height: 50px;
-  padding: 0px;
-  margin: 12px;
-  font: inherit;
-  color: #333;
-  background: #999;
-  border: 2px solid #333;
-  cursor: pointer;
-  transform: rotate(45deg);
-  
-  &:hover,
-  &.active {
-    color: #999;
-    background: #333;
-  }
-
-  &.hidden {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  &::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
-
-  &[data-icon]::before {
-    content: attr(data-icon);
-    font: 14px "FontAwesome";
-  }
-
-  &[data-icon="\f04b"]::before {
-    padding-left: 2px;
-  }
-
-  &[data-text]::before {
-    content: attr(data-text);
-    font: bold 10px "Lato", helvetica, arial, sans-serif;
-    letter-spacing: 2px;
-    padding-left: 2px;
-    text-transform: uppercase;
-  }
-
-  @include button-transitions();
-}
-
-.app.dark button {
-  color: #fff;
-  background-color: #000;
-  border-color: #fff;
-
-  &:hover,
-  &.active {
-    color: #000;
-    background-color: #fff;
-  }
-}
-
-.app.light button {
-  color: #000;
-  background-color: #fff;
-  border-color: #000;
-
-  &:hover,
-  &.active {
-    color: #fff;
-    background-color: #000;
-  }
-}
-*/

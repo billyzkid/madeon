@@ -1,3 +1,4 @@
+@import "../styles/functions";
 @import "../styles/variables";
 @import "../styles/mixins";
 
@@ -5,97 +6,8 @@
   position: relative;
   width: 100%;
   height: 100%;
-  font: 10pt sans-serif;
-  color: #333;
-  background: #fff;
-
-  a {
-    color: inherit;
-
-    &:hover {
-      color: #000;
-    }
-  }
-
-  .splash {
-    visibility: hidden;
-
-    span {
-      @include position-center();
-    }
-  }
-
-  .chrome {
-    visibility: hidden;
-
-    .background {
-      @include position-cover();
-      background: #ccc;
-    }
-
-    .header {
-      @include position-center-top();
-      text-align: center;
-    }
-
-    .footer {
-      @include position-center-bottom();
-      text-align: center;
-    }
-
-    .buttons {
-      section {
-        display: flex;
-        visibility: hidden;
-
-        &:nth-child(1) {
-          @include position-top-left();
-          flex-flow: column;
-        }
-
-        &:nth-child(2) {
-          @include position-top-right();
-          flex-flow: column;
-        }
-
-        &:nth-child(3) {
-          @include position-bottom-left();
-          flex-flow: column-reverse;
-        }
-
-        &:nth-child(4) {
-          @include position-bottom-right();
-          flex-flow: column-reverse;
-        }
-
-        button {
-          width: 70px;
-        }
-      }
-    }
-  }
-
-  &.loading {
-    .splash {
-      visibility: visible;
-    }
-  }
-
-  &.loaded {
-    .chrome {
-      visibility: visible;
-
-      .buttons {
-        section {
-          visibility: visible;
-        }
-      }
-    }
-  }
-}
-
-.app.madeon {
-  font: 16px "Lato";
+  overflow: hidden;
+  font: 16px "Lato", sans-serif;
   color: #fff;
 
   :focus {
@@ -103,52 +15,90 @@
     outline-offset: -1px;
   }
 
+  a {
+    color: inherit;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .splash {
+    visibility: hidden;
+
+    span {
+      @include position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
+    }
+  }
+
   .chrome {
+    visibility: hidden;
+
     .background {
+      @include position($top: 0, $left: 0, $bottom: 0, $right: 0);
       background: url("../images/background.jpg") right bottom/cover no-repeat;
     }
 
     .header {
-      top: 35px;
+      @include position($top: 35px, $left: 50%, $x: -50%);
 
       a {
         display: block;
         width: 162px;
         height: 48px;
         overflow: hidden;
-        white-space: nowrap;
+        text-align: center;
         text-indent: 100%;
+        white-space: nowrap;
         background: url("../images/logo.png") center/contain no-repeat;
       }
     }
 
     .footer {
-      bottom: 10px;
+      @include position($bottom: 10px, $left: 50%, $x: -50%);
+
+      a {
+        display: block;
+        font-weight: bold;
+        font-size: 10px;
+        letter-spacing: 1px;
+        padding-left: 1px;
+        text-align: center;
+        text-decoration: none;        
+        text-transform: uppercase;
+        color: rgba(14, 34, 54, 0.61);
+        
+        &:hover {
+          color: #f8e9db;
+        }
+      }
     }
 
     .buttons {
       section {
         $button-margin: 27px 0 0;
-        @include negative-margin($button-margin);
+        display: flex;
+        margin: negate($button-margin);
+        visibility: hidden;
 
         &:nth-child(1) {
-          top: 30px;
-          left: 30px;
+          @include position($top: 30px, $left: 30px);
+          flex-flow: column;
         }
 
         &:nth-child(2) {
-          top: 30px;
-          right: 30px;
+          @include position($top: 30px, $right: 30px);
+          flex-flow: column;
         }
 
         &:nth-child(3) {
-          bottom: 30px;
-          left: 30px;
+          @include position($bottom: 30px, $left: 30px);
+          flex-flow: column-reverse;
         }
 
         &:nth-child(4) {
-          bottom: 30px;
-          right: 30px;
+          @include position($bottom: 30px, $right: 30px);
+          flex-flow: column-reverse;
         }
 
         button {
@@ -160,11 +110,26 @@
           color: #f8e9db;
           background: rgba(14, 34, 54, 0.61);
           transform: rotate(45deg);
+          cursor: pointer;
 
           &.active,
           &:hover {
             color: #0e2236;
             background: #f8e9db;
+          }
+
+          span {
+            font-weight: bold;
+            font-size: 9px;
+            line-height: 11px;
+            letter-spacing: 2px;
+            padding-left: 2px;
+            text-transform: uppercase;
+          }
+
+          &::before,
+          span {
+            transform: rotate(-45deg);
           }
 
           &.url {
@@ -198,242 +163,26 @@
           &.stop {
             @include button-icon("\f04d");
           }
+        }
+      }
+    }
+  }
 
-          &::before,
-          span {
-            transform: rotate(-45deg);
-          }
+  &.loading {
+    .splash {
+      visibility: visible;
+    }
+  }
+
+  &.loaded {
+    .chrome {
+      visibility: visible;
+
+      .buttons {
+        section {
+          visibility: visible;
         }
       }
     }
   }
 }
-
-/*
-.app {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  font: 16px "Lato", helvetica, arial, sans-serif;
-  color: #333;
-  background: #999;
-  border: 2px solid #333;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  a {
-    color: inherit;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  :focus {
-    outline: lime dashed 2px;
-    outline-offset: 1px;
-  }
-
-  .splash {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 500ms ease-out 0ms, visibility 0ms linear 500ms;
-
-    span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      
-      &::before {
-        display: block;
-        content: "";
-        width: 100px;
-        height: 71px;
-        margin: auto;
-        background: url("../images/react.svg") center/contain no-repeat;
-        animation: spin 2s linear infinite;
-      }
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  }
-
-  .chrome {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 500ms ease-out 500ms, visibility 0ms linear 1000ms;
-
-    .background {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: url("../images/background.jpg") right bottom/cover no-repeat;
-    }
-
-    .header {
-      position: absolute;
-      top: 35px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      a {
-        display: block;
-        width: 162px;
-        height: 48px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-indent: 100%;
-        text-align: center;
-        text-decoration: none;
-        background: url("../images/logo.png") center/contain no-repeat;
-      }
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-
-      a {
-        display: block;
-        color: rgba(14, 34, 54, 0.61);
-        white-space: nowrap;
-        text-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 10px;
-        letter-spacing: 1px;
-        padding-left: 1px;
-
-        &:hover {
-          color: #f8e9db;
-        }
-      }
-    }
-
-    .buttons {
-      section {
-        position: absolute;
-        display: flex;
-        flex-flow: column;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 500ms ease-out 0ms, visibility 0ms linear 700ms, transform 700ms ease-in-out 0ms;
-
-        &:nth-child(1) {
-          top: 18px;
-          left: 18px;
-          transform: translateY(-10px);
-
-          button {
-            &:nth-child(2) {
-              @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
-            }
-
-            &:nth-child(3) {
-              @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
-            }
-
-            &:nth-child(4) {
-              @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
-            }
-          }
-        }
-
-        &:nth-child(2) {
-          top: 18px;
-          right: 18px;
-          transform: translateY(-10px);
-
-          button {
-            &:nth-child(2) {
-              @include button-transitions($visible-delay: 0ms, $hidden-delay: 400ms);
-            }
-
-            &:nth-child(3) {
-              @include button-transitions($visible-delay: 200ms, $hidden-delay: 200ms);
-            }
-
-            &:nth-child(4) {
-              @include button-transitions($visible-delay: 400ms, $hidden-delay: 0ms);
-            }
-          }
-        }
-
-        &:nth-child(3) {
-          bottom: 18px;
-          left: 18px;
-          transform: translateY(10px);
-        }
-
-        &:nth-child(4) {
-          bottom: 18px;
-          right: 18px;
-          transform: translateY(10px);
-        }
-      }
-    }
-  }
-
-  &.loading .splash {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 500ms ease-in 500ms, visibility 0ms linear 500ms;
-  }
-
-  &.loaded .chrome {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
-
-    .buttons {
-      section {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0px);
-        transition: opacity 500ms ease-in 500ms, visibility 0ms linear 500ms, transform 700ms ease-in-out 500ms;
-      }
-    }
-  }
-}
-
-.app.dark {
-  color: #fff;
-  background-color: #000;
-  border-color: #fff;
-}
-
-.app.light {
-  color: #000;
-  background-color: #fff;
-  border-color: #000;
-}
-
-@mixin button-transitions($visible-duration: 500ms, $visible-delay: 0ms, $hidden-duration: 500ms, $hidden-delay: 0ms) {
-  transition: all 200ms, opacity $visible-duration ease-in $visible-delay, visibility 0ms linear $visible-delay;
-
-  &.hidden {
-    transition: all 200ms, opacity $hidden-duration ease-out $hidden-delay, visibility 0ms linear $hidden-duration + $hidden-delay;
-  }
-}
-*/

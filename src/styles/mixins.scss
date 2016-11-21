@@ -1,60 +1,10 @@
-@import "./functions";
-
-@mixin position($position: absolute, $top: auto, $bottom: auto, $left: auto, $right: auto, $translateX: 0, $translateY: 0) {
+@mixin position($position: absolute, $top: auto, $bottom: auto, $left: auto, $right: auto, $x: 0, $y: 0) {
   position: $position;
   top: $top;
   bottom: $bottom;
   left: $left;
   right: $right;
-  transform: translate($translateX, $translateY);
-}
-
-@mixin position-cover($position: absolute) {
-  @include position($position: $position, $top: 0, $left: 0, $bottom: 0, $right: 0);
-}
-
-@mixin position-center($position: absolute) {
-  @include position($position: $position, $top: 50%, $left: 50%, $translateX: -50%, $translateY: -50%);
-}
-
-@mixin position-center-top($position: absolute) {
-  @include position($position: $position, $top: 0, $left: 50%, $translateX: -50%);
-}
-
-@mixin position-center-bottom($position: absolute) {
-  @include position($position: $position, $bottom: 0, $left: 50%, $translateX: -50%);
-}
-
-@mixin position-center-left($position: absolute) {
-  @include position($position: $position, $top: 50%, $left: 0, $translateY: -50%);
-}
-
-@mixin position-center-right($position: absolute) {
-  @include position($position: $position, $top: 50%, $right: 0, $translateY: -50%);
-}
-
-@mixin position-top-left($position: absolute) {
-  @include position($position: $position, $top: 0, $left: 0);
-}
-
-@mixin position-top-right($position: absolute) {
-  @include position($position: $position, $top: 0, $right: 0);
-}
-
-@mixin position-bottom-left($position: absolute) {
-  @include position($position: $position, $bottom: 0, $left: 0);
-}
-
-@mixin position-bottom-right($position: absolute) {
-  @include position($position: $position, $bottom: 0, $right: 0);
-}
-
-@mixin negative-padding($padding) {
-  padding: negate($padding);
-}
-
-@mixin negative-margin($margin) {
-  margin: negate($margin);
+  transform: translate($x, $y);
 }
 
 @mixin button-icon($content) {

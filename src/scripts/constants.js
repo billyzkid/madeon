@@ -1,6 +1,5 @@
 export const AppTheme = {
-  none: "none",
-  madeon: "madeon"
+  default: "default"
 }
 
 export const AppState = {
