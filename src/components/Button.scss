@@ -12,4 +12,8 @@
   &:hover {
     background: #999;
   }
+
+  &.hidden {
+    visibility: hidden;
+  }
 }

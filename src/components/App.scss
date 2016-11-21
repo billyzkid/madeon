@@ -19,15 +19,23 @@
     color: inherit;
   }
 
-  .hidden {
-    visibility: hidden;
-  }
-
   .splash {
     visibility: hidden;
 
     span {
       @include position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
+      color: #000;
+      text-align: center;
+      
+      &::before {
+        display: block;
+        width: 100px;
+        height: 71px;
+        margin: auto;
+        content: "";
+        background: url("../images/react.svg") center/contain no-repeat;
+        animation: spin 2s linear infinite;
+      }
     }
   }
 
@@ -184,5 +192,15 @@
         }
       }
     }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

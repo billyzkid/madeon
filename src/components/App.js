@@ -61,7 +61,7 @@ export default class App extends React.PureComponent {
     return (
       <div className={classNames}>
         <div className="splash">
-          <span>Loading...</span>
+          <span>Loading adas fasdf asdf asdf asdf a...</span>
         </div>
         <div className="chrome">
           <div className="background" />
