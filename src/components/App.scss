@@ -20,10 +20,12 @@
   }
 
   .splash {
+    opacity: 0;
     visibility: hidden;
+    transition: opacity 500ms ease-out 0ms, visibility 500ms linear 0ms;
 
     span {
-      @include position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
+      @include absolute-position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
       color: #000;
       text-align: center;
       
@@ -40,15 +42,17 @@
   }
 
   .chrome {
+    opacity: 0;
     visibility: hidden;
+    transition: opacity 500ms ease-out 0ms, visibility 500ms linear 0ms;
 
     .background {
-      @include position($top: 0, $left: 0, $bottom: 0, $right: 0);
+      @include absolute-position($top: 0, $left: 0, $bottom: 0, $right: 0);
       background: url("../images/background.jpg") right bottom/cover no-repeat;
     }
 
     .header {
-      @include position($top: 35px, $left: 50%, $x: -50%);
+      @include absolute-position($top: 35px, $left: 50%, $x: -50%);
 
       a {
         display: block;
@@ -63,7 +67,7 @@
     }
 
     .footer {
-      @include position($bottom: 10px, $left: 50%, $x: -50%);
+      @include absolute-position($bottom: 10px, $left: 50%, $x: -50%);
 
       a {
         display: block;
@@ -85,31 +89,61 @@
     .buttons {
       section {
         $button-margin: 27px 0 0;
-        display: flex;
         margin: negate($button-margin);
+        opacity: 0;
         visibility: hidden;
+        transition: opacity 500ms ease-out 0ms, visibility 500ms linear 0ms, transform 500ms ease-in-out 0ms;
 
         &:nth-child(1) {
-          @include position($top: 30px, $left: 30px);
-          flex-flow: column;
+          @include absolute-position($top: 30px, $left: 30px, $y: -10px);
+          @include flex-display($direction: column);
+
+          button {
+            &:nth-child(2) {
+              @include button-transition-delay($visible-delay: 0ms, $hidden-delay: 400ms);
+            }
+
+            &:nth-child(3) {
+              @include button-transition-delay($visible-delay: 200ms, $hidden-delay: 200ms);
+            }
+
+            &:nth-child(4) {
+              @include button-transition-delay($visible-delay: 400ms, $hidden-delay: 0ms);
+            }
+          }
         }
 
         &:nth-child(2) {
-          @include position($top: 30px, $right: 30px);
-          flex-flow: column;
+          @include absolute-position($top: 30px, $right: 30px, $y: -10px);
+          @include flex-display($direction: column);
+
+          button {
+            &:nth-child(2) {
+              @include button-transition-delay($visible-delay: 0ms, $hidden-delay: 400ms);
+            }
+
+            &:nth-child(3) {
+              @include button-transition-delay($visible-delay: 200ms, $hidden-delay: 200ms);
+            }
+
+            &:nth-child(4) {
+              @include button-transition-delay($visible-delay: 400ms, $hidden-delay: 0ms);
+            }
+          }
         }
 
         &:nth-child(3) {
-          @include position($bottom: 30px, $left: 30px);
-          flex-flow: column-reverse;
+          @include absolute-position($bottom: 30px, $left: 30px, $y: 10px);
+          @include flex-display($direction: column-reverse);
         }
 
         &:nth-child(4) {
-          @include position($bottom: 30px, $right: 30px);
-          flex-flow: column-reverse;
+          @include absolute-position($bottom: 30px, $right: 30px, $y: 10px);
+          @include flex-display($direction: column-reverse);
         }
 
         button {
+          @include flex-display($justify-content: center);
           width: 44px;
           height: 44px;
           padding: 0;
@@ -119,11 +153,18 @@
           background: rgba(14, 34, 54, 0.61);
           transform: rotate(45deg);
           cursor: pointer;
+          transition: all 200ms, opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
 
           &.active,
           &:hover {
             color: #0e2236;
             background: #f8e9db;
+          }
+
+          &.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 200ms, opacity 500ms ease-out 0ms, visibility 500ms linear 0ms;
           }
 
           span {
@@ -133,43 +174,23 @@
             letter-spacing: 2px;
             padding-left: 2px;
             text-transform: uppercase;
-          }
-
-          &::before,
-          span {
             transform: rotate(-45deg);
           }
 
-          &.url {
-            @include button-icon("\f064");
+          &[data-icon] {
+            &::before {
+              font: 14px/14px "FontAwesome";
+              content: attr(data-icon);
+              transform: rotate(-45deg);
+            }
+
+            span {
+              display: none;
+            }
           }
 
-          &.twitter {
-            @include button-icon("\f099");
-          }
-
-          &.facebook {
-            @include button-icon("\f09a");
-          }
-
-          &.launchpad {
-            @include button-icon("\f287");
-          }
-
-          &.help {
-            @include button-icon("\f128");
-          }
-
-          &.play {
-            @include button-icon("\f04b");
-          }
-
-          &.pause {
-            @include button-icon("\f04c");
-          }
-
-          &.stop {
-            @include button-icon("\f04d");
+          &[data-icon="\f04b"]::before {
+            padding-left: 2px;
           }
         }
       }
@@ -178,17 +199,24 @@
 
   &.loading {
     .splash {
+      opacity: 1;
       visibility: visible;
+      transition: opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
     }
   }
 
   &.loaded {
     .chrome {
+      opacity: 1;
       visibility: visible;
+      transition: opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
 
       .buttons {
         section {
+          opacity: 1;
           visibility: visible;
+          transform: translateY(0px);
+          transition: opacity 500ms ease-in 500ms, visibility 0ms linear 500ms, transform 500ms ease-in-out 500ms;
         }
       }
     }

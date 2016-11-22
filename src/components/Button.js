@@ -4,7 +4,7 @@ import "./Button.scss";
 
 export default class Button extends React.PureComponent {
   static propTypes = {
-    className: React.PropTypes.string,
+    icon: React.PropTypes.string,
     title: React.PropTypes.string,
     isActive: React.PropTypes.bool,
     isVisible: React.PropTypes.bool,
@@ -24,13 +24,13 @@ export default class Button extends React.PureComponent {
   render() {
     trace(this, this.render);
 
-    const classNames = getClassNames(this.props.className, {
+    const classNames = getClassNames({
       active: this.props.isActive,
       hidden: !this.props.isVisible
     });
 
     return (
-      <button type="button" className={classNames} title={this.props.title} onClick={this.props.onClick}>
+      <button type="button" className={classNames} data-icon={this.props.icon} title={this.props.title} onClick={this.props.onClick}>
         <span>{this.props.children}</span>
       </button>
     );

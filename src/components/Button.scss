@@ -1,16 +1,16 @@
 .app button {
-  display: flex;
-  justify-content: center;
   font: inherit;
   color: #000;
-  background: #ddd;
+  background: #ccc;
 
   &.active {
-    background: #bbb;
+    color: #000;
+    background: #999;
   }
 
   &:hover {
-    background: #999;
+    color: #fff;
+    background: #000;
   }
 
   &.hidden {

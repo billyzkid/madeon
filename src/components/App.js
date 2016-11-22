@@ -61,7 +61,7 @@ export default class App extends React.PureComponent {
     return (
       <div className={classNames}>
         <div className="splash">
-          <span>Loading adas fasdf asdf asdf asdf a...</span>
+          <span>Loading...</span>
         </div>
         <div className="chrome">
           <div className="background" />
@@ -73,25 +73,25 @@ export default class App extends React.PureComponent {
           </div>
           <div className="buttons">
             <section>
-              <Button className="share" title="Share your mix" isActive={this.state.isShareButtonsVisible} onClick={this._onShareButtonClick}>Share</Button>
-              <Button className="url" title="Copy mix URL" isVisible={this.state.isShareButtonsVisible} onClick={this._onUrlButtonClick}>Copy URL</Button>
-              <Button className="twitter" title="Share mix on Twitter" isVisible={this.state.isShareButtonsVisible} onClick={this._onTwitterButtonClick}>Twitter</Button>
-              <Button className="facebook" title="Share mix on Facebook" isVisible={this.state.isShareButtonsVisible} onClick={this._onFacebookButtonClick}>Facebook</Button>
+              <Button title="Share your mix" isActive={this.state.isShareButtonsVisible} onClick={this._onShareButtonClick}>Share</Button>
+              <Button icon="&#xf064;" title="Copy mix URL" isVisible={this.state.isShareButtonsVisible} onClick={this._onUrlButtonClick}>Copy URL</Button>
+              <Button icon="&#xf099;" title="Share mix on Twitter" isVisible={this.state.isShareButtonsVisible} onClick={this._onTwitterButtonClick}>Twitter</Button>
+              <Button icon="&#xf09a;" title="Share mix on Facebook" isVisible={this.state.isShareButtonsVisible} onClick={this._onFacebookButtonClick}>Facebook</Button>
             </section>
             <section>
-              <Button className="info" title="More information" isActive={this.state.isInfoButtonsVisible} onClick={this._onInfoButtonClick}>Info</Button>
-              <Button className="about" title="About the application" isVisible={this.state.isInfoButtonsVisible} onClick={this._onAboutButtonClick}>About</Button>
-              <Button className="launchpad" title="Connect your Launchpad" isVisible={this.state.isInfoButtonsVisible} onClick={this._onLaunchpadButtonClick}>Launchpad</Button>
-              <Button className="help" title="Help me!" isVisible={this.state.isInfoButtonsVisible} onClick={this._onHelpButtonClick}>Help</Button>
+              <Button title="More information" isActive={this.state.isInfoButtonsVisible} onClick={this._onInfoButtonClick}>Info</Button>
+              <Button title="About the application" isVisible={this.state.isInfoButtonsVisible} onClick={this._onAboutButtonClick}>About</Button>
+              <Button icon="&#xf287;" title="Connect your Launchpad" isVisible={this.state.isInfoButtonsVisible} onClick={this._onLaunchpadButtonClick}>Launchpad</Button>
+              <Button icon="&#xf128;" title="Help me!" isVisible={this.state.isInfoButtonsVisible} onClick={this._onHelpButtonClick}>Help</Button>
             </section>
             <section>
-              {this.state.playerState === PlayerState.paused ? <Button ref="playPauseButton" className="play" title="Resume player" onClick={this._onPlayButtonClick}>Play</Button> :
-                this.state.playerState === PlayerState.playing ? <Button ref="playPauseButton" className="pause" title="Pause player" onClick={this._onPauseButtonClick}>Pause</Button> :
+              {this.state.playerState === PlayerState.paused ? <Button ref="playPauseButton" icon="&#xf04b;" title="Resume player" onClick={this._onPlayButtonClick}>Play</Button> :
+                this.state.playerState === PlayerState.playing ? <Button ref="playPauseButton" icon="&#xf04c;" title="Pause player" onClick={this._onPauseButtonClick}>Pause</Button> :
                   this.refs.playPauseButton ? <Button ref="playPauseButton" {...this.refs.playPauseButton.props} isVisible={false} /> :
                     <Button ref="playPauseButton" isVisible={false} />}
             </section>
             <section>
-              <Button className="stop" title="Stop player" isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} onClick={this._onStopButtonClick}>Stop</Button>
+              <Button icon="&#xf04d;" title="Stop player" isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} onClick={this._onStopButtonClick}>Stop</Button>
             </section>
           </div>
         </div>

@@ -1,5 +1,14 @@
-@mixin position($position: absolute, $top: auto, $bottom: auto, $left: auto, $right: auto, $x: 0, $y: 0) {
-  position: $position;
+@mixin flex-display($direction: row, $wrap: nowrap, $justify-content: flex-start, $align-content: stretch, $align-items: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify-content;
+  align-content: $align-content;
+  align-items: $align-items;
+}
+
+@mixin absolute-position($top: auto, $bottom: auto, $left: auto, $right: auto, $x: 0, $y: 0) {
+  position: absolute;
   top: $top;
   bottom: $bottom;
   left: $left;
@@ -7,13 +16,10 @@
   transform: translate($x, $y);
 }
 
-@mixin button-icon($content) {
-  &::before {
-    font: 14px/14px "FontAwesome";
-    content: $content;
-  }
+@mixin button-transition-delay($visible-delay: 0ms, $hidden-delay: 0ms) {
+  transition-delay: 0ms, $visible-delay, $visible-delay;
 
-  span {
-    display: none;
+  &.hidden {
+    transition-delay: 0ms, $hidden-delay, $hidden-delay;
   }
 }
