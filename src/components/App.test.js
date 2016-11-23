@@ -3,5 +3,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 test("renders", () => {
-  ReactDOM.render(<App />, document.createElement("div"));
+  var s = ReactDOM.render(<App />, document.createElement("div"));
+  console.log(s);
 });

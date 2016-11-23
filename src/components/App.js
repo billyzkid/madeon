@@ -1,7 +1,9 @@
 import React from "react";
 import Button from "./Button";
+import Dialog from "./Dialog";
+import Error from "./Error";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
-import { trace, getClassNames, delay } from "../scripts/functions";
+import { trace, getUrl, getClassNames, delay } from "../scripts/functions";
 import "./App.scss";
 
 export default class App extends React.PureComponent {
@@ -28,13 +30,25 @@ export default class App extends React.PureComponent {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
+    this._onUrlDialogOpen = this._onUrlDialogOpen.bind(this);
+    this._onUrlDialogClose = this._onUrlDialogClose.bind(this);
+    this._onMidiDialogOpen = this._onMidiDialogOpen.bind(this);
+    this._onMidiDialogClose = this._onMidiDialogClose.bind(this);
+    this._onLoadErrorShow = this._onLoadErrorShow.bind(this);
+    this._onLoadErrorHide = this._onLoadErrorHide.bind(this);
+    this._onAudioContextUnsupportedErrorShow = this._onAudioContextUnsupportedErrorShow.bind(this);
+    this._onAudioContextUnsupportedErrorHide = this._onAudioContextUnsupportedErrorHide.bind(this);
 
     this.state = {
       theme: props.theme,
       appState: AppState.default,
       playerState: PlayerState.playing,
       isShareButtonsVisible: false,
-      isInfoButtonsVisible: false
+      isInfoButtonsVisible: false,
+      isUrlDialogOpen: false,
+      isMidiDialogOpen: false,
+      isLoadErrorVisible: false,
+      isAudioContextUnsupportedErrorVisible: false
     };
   }
 
@@ -94,6 +108,28 @@ export default class App extends React.PureComponent {
               <Button icon="&#xf04d;" title="Stop player" isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} onClick={this._onStopButtonClick}>Stop</Button>
             </section>
           </div>
+          <div className="dialogs">
+            <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
+              <h1>Your mix URL</h1>
+              <p>Copy the following URL, and then share it with the world.</p>
+              <input type="url" value={getUrl()} readOnly />
+            </Dialog>
+            <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
+              <h1>Enable the Web MIDI API</h1>
+              <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
+              <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
+            </Dialog>
+          </div>
+          <div className="errors">
+            <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
+              <p>Something went horribly wrong.</p>
+              <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
+            </Error>
+            <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
+              <p>This browser does not support the fancy new Web Audio API.</p>
+              <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
+            </Error>
+          </div>
         </div>
       </div>
     );
@@ -146,5 +182,45 @@ export default class App extends React.PureComponent {
   _onStopButtonClick(event) {
     trace(this, this._onStopButtonClick, event);
     this.setState({ playerState: PlayerState.default });
+  }
+
+  _onUrlDialogOpen() {
+    trace(this, this._onUrlDialogOpen);
+    this.setState({ isUrlDialogOpen: true });
+  }
+
+  _onUrlDialogClose() {
+    trace(this, this._onUrlDialogClose);
+    this.setState({ isUrlDialogOpen: false });
+  }
+
+  _onMidiDialogOpen() {
+    trace(this, this._onMidiDialogOpen);
+    this.setState({ isMidiDialogOpen: true });
+  }
+
+  _onMidiDialogClose() {
+    trace(this, this._onMidiDialogClose);
+    this.setState({ isMidiDialogOpen: false });
+  }
+
+  _onLoadErrorShow() {
+    trace(this, this._onLoadErrorShow);
+    this.setState({ isLoadErrorVisible: true });
+  }
+
+  _onLoadErrorHide() {
+    trace(this, this._onLoadErrorHide);
+    this.setState({ isLoadErrorVisible: false });
+  }
+
+  _onAudioContextUnsupportedErrorShow() {
+    trace(this, this._onAudioContextUnsupportedErrorShow);
+    this.setState({ isAudioContextUnsupportedErrorVisible: true });
+  }
+
+  _onAudioContextUnsupportedErrorHide() {
+    trace(this, this._onAudioContextUnsupportedErrorHide);
+    this.setState({ isAudioContextUnsupportedErrorVisible: false });
   }
 }

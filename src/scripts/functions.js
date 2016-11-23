@@ -11,6 +11,15 @@ export function trace(instance, method, ...args) {
   }
 }
 
+export function getUrl() {
+  try {
+    // throws an error when called during test render
+    return window.location.href;
+  } catch (error) {
+    return "about:blank";
+  }
+}
+
 export function getClassNames(...args) {
   let array = [];
 
