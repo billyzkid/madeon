@@ -140,7 +140,8 @@ export default class App extends React.PureComponent {
     try {
       return window.location.href;
     } catch (error) {
-      // Ignore unhandled promise rejection warning
+      // Ignore errors thrown during testing
+      return "";
     }
   }
 
