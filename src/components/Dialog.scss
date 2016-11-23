@@ -5,9 +5,9 @@
     @include absolute-position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
     width: 400px;
     background: #999;
-  }
 
-  .button {
-    @include absolute-position($top: 10px, $right: 10px);
+    button {
+      @include absolute-position($top: 10px, $right: 10px);
+    }
   }
 }

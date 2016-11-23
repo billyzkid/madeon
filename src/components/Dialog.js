@@ -27,8 +27,10 @@ export default class Dialog extends React.PureComponent {
     return (
       <div className={classNames}>
         <Overlay isInitialFocusEnabled isDismissEnabled isEscapeEnabled isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose}>
-          <div className="content">{this.props.children}</div>
-          <Button icon="&#xf00d;" title="Close dialog" onClick={this.props.onClose}>Close</Button>
+          <div className="content">
+            {this.props.children}
+            <Button icon="&#xf00d;" title="Close dialog" onClick={this.props.onClose}>Close</Button>
+          </div>
         </Overlay>
       </div>
     );
