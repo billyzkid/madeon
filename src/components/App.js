@@ -30,6 +30,7 @@ export default class App extends React.PureComponent {
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
     this._onPauseButtonClick = this._onPauseButtonClick.bind(this);
     this._onStopButtonClick = this._onStopButtonClick.bind(this);
+    this._onReloadLinkClick = this._onReloadLinkClick.bind(this);
     this._onUrlDialogOpen = this._onUrlDialogOpen.bind(this);
     this._onUrlDialogClose = this._onUrlDialogClose.bind(this);
     this._onMidiDialogOpen = this._onMidiDialogOpen.bind(this);
@@ -142,10 +143,12 @@ export default class App extends React.PureComponent {
 
   _onUrlButtonClick(event) {
     trace(this, this._onUrlButtonClick, event);
+    this.setState({ isUrlDialogOpen: true }); // FIXME
   }
 
   _onTwitterButtonClick(event) {
     trace(this, this._onTwitterButtonClick, event);
+    this.setState({ isMidiDialogOpen: true }); // FIXME
   }
 
   _onFacebookButtonClick(event) {
@@ -159,10 +162,12 @@ export default class App extends React.PureComponent {
 
   _onAboutButtonClick(event) {
     trace(this, this._onAboutButtonClick, event);
+    this.setState({ isLoadErrorVisible: true }); // FIXME
   }
 
   _onLaunchpadButtonClick(event) {
     trace(this, this._onLaunchpadButtonClick, event);
+    this.setState({ isAudioContextUnsupportedErrorVisible: true }); // FIXME
   }
 
   _onHelpButtonClick(event) {
@@ -182,6 +187,12 @@ export default class App extends React.PureComponent {
   _onStopButtonClick(event) {
     trace(this, this._onStopButtonClick, event);
     this.setState({ playerState: PlayerState.default });
+  }
+
+  _onReloadLinkClick(event) {
+    trace(this, this._onReloadLinkClick, event);
+    event.preventDefault();
+    window.location.reload(true);
   }
 
   _onUrlDialogOpen() {

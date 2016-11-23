@@ -1,4 +1,5 @@
 import React from "react";
+import Overlay from "./Overlay";
 import { trace, getClassNames } from "../scripts/functions";
 import "./Error.scss";
 
@@ -24,7 +25,9 @@ export default class Error extends React.PureComponent {
 
     return (
       <div className={classNames}>
-        {this.props.children}
+        <Overlay isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
+          <div className="content">{this.props.children}</div>
+        </Overlay>
       </div>
     );
   }

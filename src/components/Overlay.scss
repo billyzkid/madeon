@@ -1,0 +1,13 @@
+@import "../styles/mixins";
+
+.app .overlay {
+  @include absolute-position($top: 0, $left: 0, $bottom: 0, $right: 0);
+  background: rgba(14, 34, 54, 0.61);
+  transition: opacity 200ms ease-in 0ms, visibility 0ms linear 0ms;
+
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms ease-out 0ms, visibility 200ms linear 0ms;
+  }
+}

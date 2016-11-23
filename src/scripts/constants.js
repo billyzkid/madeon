@@ -14,3 +14,7 @@ export const PlayerState = {
   paused: "paused",
   playing: "playing",
 }
+
+export const KeyCodes = {
+  escape: 27
+};
