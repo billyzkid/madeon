@@ -89,6 +89,8 @@
     .buttons {
       section {
         $button-margin: 27px 0 0;
+        $button-rotation: 45deg;
+
         margin: negate($button-margin);
         opacity: 0;
         visibility: hidden;
@@ -143,7 +145,6 @@
         }
 
         button {
-          @include flex-display($justify-content: center);
           width: 44px;
           height: 44px;
           padding: 0;
@@ -151,20 +152,13 @@
           margin: $button-margin;
           color: #f8e9db;
           background: rgba(14, 34, 54, 0.61);
-          transform: rotate(45deg);
           cursor: pointer;
-          transition: all 200ms, opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
+          transform: rotate($button-rotation);
 
           &.active,
           &:hover {
             color: #0e2236;
             background: #f8e9db;
-          }
-
-          &.hidden {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 200ms, opacity 500ms ease-out 0ms, visibility 500ms linear 0ms;
           }
 
           span {
@@ -174,19 +168,16 @@
             letter-spacing: 2px;
             padding-left: 2px;
             text-transform: uppercase;
-            transform: rotate(-45deg);
           }
 
-          &[data-icon] {
-            &::before {
-              font: 14px/14px "FontAwesome";
-              content: attr(data-icon);
-              transform: rotate(-45deg);
-            }
+          span,
+          &::before,
+          &::after {
+            transform: rotate(negate($button-rotation));
+          }
 
-            span {
-              display: none;
-            }
+          &[data-icon]::before {
+            font-size: 14px;
           }
 
           &[data-icon="\f04b"]::before {

@@ -17,9 +17,9 @@
 }
 
 @mixin button-transition-delay($visible-delay: 0ms, $hidden-delay: 0ms) {
-  transition-delay: 0ms, $visible-delay, $visible-delay;
+  transition-delay: 0ms, 0ms, $visible-delay, $visible-delay;
 
   &.hidden {
-    transition-delay: 0ms, $hidden-delay, $hidden-delay;
+    transition-delay: 0ms, 0ms, $hidden-delay, $hidden-delay;
   }
 }
