@@ -1,22 +1,13 @@
 export function trace(instance, method, ...args) {
   if (instance.name) {
-    // static method
+    // Static method
     console.log(instance.name + "::" + method.name, ...args);
   } else if (instance.constructor !== method) {
-    // instance method
+    // Instance method
     console.log(instance.constructor.name + "." + method.name.replace(/^bound\s/, ""), ...args);
   } else {
-    // class constructor
+    // Class constructor
     console.log(instance.constructor.name + ".constructor", ...args);
-  }
-}
-
-export function getUrl() {
-  try {
-    // throws an error when called during test render
-    return window.location.href;
-  } catch (error) {
-    return "about:blank";
   }
 }
 
@@ -40,10 +31,10 @@ export function getClassNames(...args) {
     }
   }
 
-  // strip whitespace
+  // Strip whitespace
   array = array.join(" ").match(/\S+/g);
 
-  // remove duplicates
+  // Remove duplicates
   array = [...new Set(array)];
 
   if (array.length > 0) {

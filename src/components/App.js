@@ -3,7 +3,7 @@ import Button from "./Button";
 import Dialog from "./Dialog";
 import Error from "./Error";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
-import { trace, getUrl, getClassNames, delay } from "../scripts/functions";
+import { trace, getClassNames, delay } from "../scripts/functions";
 import "./App.scss";
 
 export default class App extends React.PureComponent {
@@ -113,7 +113,7 @@ export default class App extends React.PureComponent {
             <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
               <h1>Your mix URL</h1>
               <p>Copy the following URL, and then share it with the world.</p>
-              <input type="url" value={getUrl()} readOnly />
+              <input type="url" value={this._getUrl()} readOnly />
             </Dialog>
             <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
               <h1>Enable the Web MIDI API</h1>
@@ -134,6 +134,14 @@ export default class App extends React.PureComponent {
         </div>
       </div>
     );
+  }
+
+  _getUrl() {
+    try {
+      return window.location.href;
+    } catch (error) {
+      // Ignore unhandled promise rejection warning
+    }
   }
 
   _onShareButtonClick(event) {

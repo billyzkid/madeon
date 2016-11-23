@@ -1,4 +1,4 @@
-import { trace, getUrl, getClassNames, delay } from "./functions";
+import { trace, getClassNames, delay } from "./functions";
 
 describe("trace", () => {
   beforeEach(() => {
@@ -33,14 +33,6 @@ describe("trace", () => {
     expect(console.log).toHaveBeenCalledWith("Object.constructor", "1", 2, [3]);
   });
 });
-
-describe("getUrl", () => {
-  test("catches error", () => {
-    const result = getUrl();
-    expect(result).toBe("about:blank");
-  });
-});
-
 
 describe("getClassNames", () => {
   test("handles simple arguments", () => {
