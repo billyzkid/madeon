@@ -116,7 +116,7 @@ export default class App extends React.PureComponent {
               <input type="url" value={this._getUrl()} readOnly />
             </Dialog>
             <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
-              <h1>Enable the Web MIDI API</h1>
+              <h1>Enable Web MIDI API</h1>
               <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
               <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
             </Dialog>

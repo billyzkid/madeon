@@ -19,6 +19,11 @@
     color: inherit;
   }
 
+  button,
+  input {
+    font: inherit;
+  }
+
   .splash {
     opacity: 0;
     visibility: hidden;
@@ -152,7 +157,6 @@
           margin: $button-margin;
           color: #f8e9db;
           background: rgba(14, 34, 54, 0.61);
-          cursor: pointer;
           transform: rotate($button-rotation);
 
           &.active,
