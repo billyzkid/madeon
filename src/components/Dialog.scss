@@ -10,7 +10,7 @@
     background: #f8e9db;
 
     h1 {
-      margin: 10px 0 0;
+      margin: 5px 0 0;
       font-weight: 200;
       font-size: 28px;
       line-height: 1em;
@@ -18,7 +18,9 @@
     }
 
     p {
-      margin: 1em 0
+      margin: 1em 0;
+      font-size: 16px;
+      line-height: 20px;
     }
 
     input {
@@ -36,6 +38,7 @@
       padding: 0;
       border: 0;
       font-size: 28px;
+      line-height: 20px;
       color: #000;
       background: none;
     }
