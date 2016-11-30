@@ -23,7 +23,7 @@ export function getClassNames(...args) {
         array.push(arg);
       } else if (typeof arg === "object") {
         for (const key in arg) {
-          if (arg.hasOwnProperty(key) && arg[key]) {
+          if (Object.prototype.hasOwnProperty.call(arg, key) && arg[key]) {
             array.push(key);
           }
         }
@@ -50,4 +50,12 @@ export function delay(time) {
       setImmediate(resolve);
     }
   });
+}
+
+export function toArray(value) {
+  if (typeof value.length !== "number") {
+    return Object.values(value);
+  }
+
+  return [...value];
 }
