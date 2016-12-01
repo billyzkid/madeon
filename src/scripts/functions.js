@@ -42,6 +42,23 @@ export function getClassNames(...args) {
   }
 }
 
+export function getHighestZIndex(elements) {
+  //debugger;
+
+  let highestZIndex;
+
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i];
+    const zIndex = parseInt(getComputedStyle(element).getPropertyValue("z-index"), 10);
+
+    if (!isNaN(zIndex) && (highestZIndex === undefined || zIndex > highestZIndex)) {
+      highestZIndex = zIndex;
+    }
+  }
+
+  return highestZIndex;
+}
+
 export function delay(time) {
   return new Promise((resolve, reject) => {
     if (time !== undefined) {

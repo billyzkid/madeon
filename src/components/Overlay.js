@@ -1,7 +1,7 @@
 import React from "react";
 import createFocusTrap from "focus-trap";
 import { KeyCodes } from "../scripts/constants";
-import { trace, getClassNames } from "../scripts/functions";
+import { trace, getClassNames, getHighestZIndex } from "../scripts/functions";
 import "./Overlay.scss";
 
 export default class Overlay extends React.PureComponent {
@@ -80,6 +80,8 @@ export default class Overlay extends React.PureComponent {
   _show() {
     trace(this, this._show);
 
+    this.refs.root.style.zIndex = getHighestZIndex(document.getElementsByClassName("overlay")) || 0;
+
     this._focusTrap.activate();
 
     if (this.props.onShow) {
@@ -90,6 +92,8 @@ export default class Overlay extends React.PureComponent {
   _hide() {
     trace(this, this._hide);
 
+    this.refs.root.removeAttribute("style");
+    
     this._focusTrap.deactivate();
 
     if (this.props.onHide) {

@@ -201,7 +201,8 @@ export default class App extends React.PureComponent {
   _onReloadLinkClick(event) {
     trace(this, this._onReloadLinkClick, event);
     event.preventDefault();
-    window.location.reload(true);
+    //window.location.reload(true);
+    this.setState({ isMidiDialogOpen: true }); // FIXME
   }
 
   _onUrlDialogOpen() {
