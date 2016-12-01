@@ -43,8 +43,6 @@ export function getClassNames(...args) {
 }
 
 export function getHighestZIndex(elements) {
-  //debugger;
-
   let highestZIndex;
 
   for (let i = 0; i < elements.length; i++) {
