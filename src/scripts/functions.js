@@ -51,11 +51,3 @@ export function delay(time) {
     }
   });
 }
-
-export function toArray(value) {
-  if (typeof value.length !== "number") {
-    return Object.values(value);
-  }
-
-  return [...value];
-}

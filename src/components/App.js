@@ -2,9 +2,6 @@ import React from "react";
 import Button from "./Button";
 import Dialog from "./Dialog";
 import Error from "./Error";
-import Gateway from "./Gateway";
-import GatewayDest from "./GatewayDest";
-import GatewayProvider from "./GatewayProvider";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
 import { trace, getClassNames, delay } from "../scripts/functions";
 import "./App.scss";
@@ -77,76 +74,65 @@ export default class App extends React.PureComponent {
     });
 
     return (
-      <GatewayProvider>
-        <div className={classNames}>
-          <div className="splash">
-            <span>Loading...</span>
+      <div className={classNames}>
+        <div className="splash">
+          <span>Loading...</span>
+        </div>
+        <div className="chrome">
+          <div className="background" />
+          <div className="header">
+            <a href="http://madeon.fr" target="_blank">Madeon's Adventure Machine</a>
           </div>
-          <div className="chrome">
-            <div className="background" />
-            <div className="header">
-              <a href="http://madeon.fr" target="_blank">Madeon's Adventure Machine</a>
-            </div>
-            <div className="footer">
-              <a href="http://wmas.it" target="_blank">We Made This</a>
-            </div>
-            <div className="buttons">
-              <section>
-                <Button title="Share your mix" isActive={this.state.isShareButtonsVisible} onClick={this._onShareButtonClick}>Share</Button>
-                <Button icon="&#xf064;" title="Copy mix URL" isVisible={this.state.isShareButtonsVisible} onClick={this._onUrlButtonClick}>Copy URL</Button>
-                <Button icon="&#xf099;" title="Share mix on Twitter" isVisible={this.state.isShareButtonsVisible} onClick={this._onTwitterButtonClick}>Twitter</Button>
-                <Button icon="&#xf09a;" title="Share mix on Facebook" isVisible={this.state.isShareButtonsVisible} onClick={this._onFacebookButtonClick}>Facebook</Button>
-              </section>
-              <section>
-                <Button title="More information" isActive={this.state.isInfoButtonsVisible} onClick={this._onInfoButtonClick}>Info</Button>
-                <Button title="About the application" isVisible={this.state.isInfoButtonsVisible} onClick={this._onAboutButtonClick}>About</Button>
-                <Button icon="&#xf287;" title="Connect your Launchpad" isVisible={this.state.isInfoButtonsVisible} onClick={this._onLaunchpadButtonClick}>Launchpad</Button>
-                <Button icon="&#xf128;" title="Help me!" isVisible={this.state.isInfoButtonsVisible} onClick={this._onHelpButtonClick}>Help</Button>
-              </section>
-              <section>
-                {this.state.playerState === PlayerState.paused ? <Button ref="playPauseButton" icon="&#xf04b;" title="Resume player" onClick={this._onPlayButtonClick}>Play</Button> :
-                  this.state.playerState === PlayerState.playing ? <Button ref="playPauseButton" icon="&#xf04c;" title="Pause player" onClick={this._onPauseButtonClick}>Pause</Button> :
-                    this.refs.playPauseButton ? <Button ref="playPauseButton" {...this.refs.playPauseButton.props} isVisible={false} /> :
-                      <Button ref="playPauseButton" isVisible={false} />}
-              </section>
-              <section>
-                <Button icon="&#xf04d;" title="Stop player" isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} onClick={this._onStopButtonClick}>Stop</Button>
-              </section>
-            </div>
-            <div className="dialogs">
-              <Gateway id="UrlDialogGateway" into="global">
-                <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
-                  <h1>Your mix URL</h1>
-                  <p>Copy the following URL, and then share it with the world.</p>
-                  <input type="url" value={this._getUrl()} readOnly />
-                </Dialog>
-              </Gateway>
-              <Gateway id="MidiDialogGateway" into="global">
-                <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
-                  <h1>Enable Web MIDI API</h1>
-                  <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
-                  <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-                </Dialog>
-              </Gateway>
-            </div>
-            <div className="errors">
-              <Gateway id="LoadErrorGateway" into="global">
-                <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
-                  <p>Something went horribly wrong.</p>
-                  <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
-                </Error>
-              </Gateway>
-              <Gateway id="AudioContextUnsupportedErrorGateway" into="global">
-                <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
-                  <p>This browser does not support the fancy new Web Audio API.</p>
-                  <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
-                </Error>
-              </Gateway>
-            </div>
-            <GatewayDest name="global" />
+          <div className="footer">
+            <a href="http://wmas.it" target="_blank">We Made This</a>
+          </div>
+          <div className="buttons">
+            <section>
+              <Button title="Share your mix" isActive={this.state.isShareButtonsVisible} onClick={this._onShareButtonClick}>Share</Button>
+              <Button icon="&#xf064;" title="Copy mix URL" isVisible={this.state.isShareButtonsVisible} onClick={this._onUrlButtonClick}>Copy URL</Button>
+              <Button icon="&#xf099;" title="Share mix on Twitter" isVisible={this.state.isShareButtonsVisible} onClick={this._onTwitterButtonClick}>Twitter</Button>
+              <Button icon="&#xf09a;" title="Share mix on Facebook" isVisible={this.state.isShareButtonsVisible} onClick={this._onFacebookButtonClick}>Facebook</Button>
+            </section>
+            <section>
+              <Button title="More information" isActive={this.state.isInfoButtonsVisible} onClick={this._onInfoButtonClick}>Info</Button>
+              <Button title="About the application" isVisible={this.state.isInfoButtonsVisible} onClick={this._onAboutButtonClick}>About</Button>
+              <Button icon="&#xf287;" title="Connect your Launchpad" isVisible={this.state.isInfoButtonsVisible} onClick={this._onLaunchpadButtonClick}>Launchpad</Button>
+              <Button icon="&#xf128;" title="Help me!" isVisible={this.state.isInfoButtonsVisible} onClick={this._onHelpButtonClick}>Help</Button>
+            </section>
+            <section>
+              {this.state.playerState === PlayerState.paused ? <Button ref="playPauseButton" icon="&#xf04b;" title="Resume player" onClick={this._onPlayButtonClick}>Play</Button> :
+                this.state.playerState === PlayerState.playing ? <Button ref="playPauseButton" icon="&#xf04c;" title="Pause player" onClick={this._onPauseButtonClick}>Pause</Button> :
+                  this.refs.playPauseButton ? <Button ref="playPauseButton" {...this.refs.playPauseButton.props} isVisible={false} /> :
+                    <Button ref="playPauseButton" isVisible={false} />}
+            </section>
+            <section>
+              <Button icon="&#xf04d;" title="Stop player" isVisible={this.state.playerState === PlayerState.paused || this.state.playerState === PlayerState.playing} onClick={this._onStopButtonClick}>Stop</Button>
+            </section>
+          </div>
+          <div className="dialogs">
+            <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
+              <h1>Your mix URL</h1>
+              <p>Copy the following URL, and then share it with the world.</p>
+              <input type="url" value={this._getUrl()} readOnly />
+            </Dialog>
+            <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
+              <h1>Enable Web MIDI API</h1>
+              <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
+              <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
+            </Dialog>
+          </div>
+          <div className="errors">
+            <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
+              <p>Something went horribly wrong.</p>
+              <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
+            </Error>
+            <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
+              <p>This browser does not support the fancy new Web Audio API.</p>
+              <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
+            </Error>
           </div>
         </div>
-      </GatewayProvider>
+      </div>
     );
   }
 
