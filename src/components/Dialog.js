@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "./Button";
-import Overlay from "./Overlay";
 import { trace, getClassNames } from "../scripts/functions";
 import "./Dialog.scss";
 
@@ -15,6 +14,18 @@ export default class Dialog extends React.PureComponent {
   constructor(props) {
     super(props);
     trace(this, this.constructor, props);
+
+    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    trace(this, this.componentWillReceiveProps, nextProps);
+
+    if (nextProps.isOpen && !this.props.isOpen) {
+      this._open();
+    } else if (!nextProps.isOpen && this.props.isOpen) {
+      this._close();
+    }
   }
 
   render() {
@@ -26,13 +37,32 @@ export default class Dialog extends React.PureComponent {
 
     return (
       <div className={classNames}>
-        <Overlay isInitialFocusEnabled isDismissEnabled isEscapeEnabled isVisible={this.props.isOpen} onShow={this.props.onOpen} onHide={this.props.onClose}>
-          <div className="content">
-            {this.props.children}
-            <Button icon="&#xf00d;" title="Close dialog" onClick={this.props.onClose}>Close</Button>
-          </div>
-        </Overlay>
+        {this.props.children}
+        <Button icon="&#xf00d;" title="Close dialog" onClick={this._onCloseButtonClick}>Close</Button>
       </div>
     );
+  }
+
+  _open() {
+    trace(this, this._open);
+
+    if (this.props.onOpen) {
+      this.props.onOpen();
+    }
+  }
+
+  _close() {
+    trace(this, this._close);
+
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
+  }
+
+  _onCloseButtonClick(event) {
+    trace(this, this._onCloseButtonClick, event);
+    
+    event.stopPropagation();
+    this._close();
   }
 }

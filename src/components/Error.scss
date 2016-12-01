@@ -1,17 +1,23 @@
 @import "../styles/mixins";
 
 .app .error {
-  .content {
-    @include absolute-position($top: 0, $left: 0, $right: 0);
-    padding: 10px;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    background: #d4214f;
+  @include absolute-position($top: 0, $left: 0, $right: 0);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  background: #d4214f;
+  transition: transform 400ms ease-in-out 0ms, visibility 0ms linear 0ms;
 
-    p {
-      margin: 0;
-    }
+  &.hidden {
+    z-index: 1;
+    transform: translateY(-100%);
+    visibility: hidden;
+    transition: transform 400ms ease-in-out 0ms, visibility 400ms linear 0ms;
+  }
+
+  p {
+    margin: 0;
   }
 }

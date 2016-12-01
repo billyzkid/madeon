@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button";
 import Dialog from "./Dialog";
 import Error from "./Error";
+import Overlay from "./Overlay";
 import { AppTheme, AppState, PlayerState } from "../scripts/constants";
 import { trace, getClassNames, delay } from "../scripts/functions";
 import "./App.scss";
@@ -39,6 +40,11 @@ export default class App extends React.PureComponent {
     this._onLoadErrorHide = this._onLoadErrorHide.bind(this);
     this._onAudioContextUnsupportedErrorShow = this._onAudioContextUnsupportedErrorShow.bind(this);
     this._onAudioContextUnsupportedErrorHide = this._onAudioContextUnsupportedErrorHide.bind(this);
+
+    this._onDialogOverlayShow = this._onDialogOverlayShow.bind(this);
+    this._onDialogOverlayHide = this._onDialogOverlayHide.bind(this);
+    this._onErrorOverlayShow = this._onErrorOverlayShow.bind(this);
+    this._onErrorOverlayHide = this._onErrorOverlayHide.bind(this);
 
     this.state = {
       theme: props.theme,
@@ -110,26 +116,30 @@ export default class App extends React.PureComponent {
             </section>
           </div>
           <div className="dialogs">
-            <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
-              <h1>Your mix URL</h1>
-              <p>Copy the following URL, and then share it with the world.</p>
-              <input type="url" value={this._getUrl()} readOnly />
-            </Dialog>
-            <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
-              <h1>Enable Web MIDI API</h1>
-              <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
-              <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
-            </Dialog>
+            <Overlay isDismissEnabled isEscapeEnabled isVisible={this.state.isUrlDialogOpen || this.state.isMidiDialogOpen} onShow={this._onDialogOverlayShow} onHide={this._onDialogOverlayHide}>
+              <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
+                <h1>Your mix URL</h1>
+                <p>Copy the following URL, and then share it with the world.</p>
+                <input type="url" value={this._getUrl()} readOnly />
+              </Dialog>
+              <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
+                <h1>Enable Web MIDI API</h1>
+                <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
+                <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
+              </Dialog>
+            </Overlay>
           </div>
           <div className="errors">
-            <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
-              <p>Something went horribly wrong.</p>
-              <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
-            </Error>
-            <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
-              <p>This browser does not support the fancy new Web Audio API.</p>
-              <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
-            </Error>
+            <Overlay isDismissEnabled isEscapeEnabled isVisible={this.state.isLoadErrorVisible || this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onErrorOverlayShow} onHide={this._onErrorOverlayHide}>
+              <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
+                <p>Something went horribly wrong.</p>
+                <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
+              </Error>
+              <Error isVisible={this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onAudioContextUnsupportedErrorShow} onHide={this._onAudioContextUnsupportedErrorHide}>
+                <p>This browser does not support the fancy new Web Audio API.</p>
+                <p>Please use the latest <a href="http://apple.com/safari/" target="_blank">Safari</a>, <a href="http://google.com/chrome/" target="_blank">Chrome</a>, <a href="http://mozilla.org/firefox/" target="_blank">Firefox</a> or <a href="http://opera.com/" target="_blank">Opera</a> for the best experience.</p>
+              </Error>
+            </Overlay>
           </div>
         </div>
       </div>
@@ -201,13 +211,12 @@ export default class App extends React.PureComponent {
   _onReloadLinkClick(event) {
     trace(this, this._onReloadLinkClick, event);
     event.preventDefault();
-    //window.location.reload(true);
-    this.setState({ isMidiDialogOpen: true }); // FIXME
+    window.location.reload(true);
   }
 
   _onUrlDialogOpen() {
     trace(this, this._onUrlDialogOpen);
-    this.setState({ isUrlDialogOpen: true });
+    this.setState({ isUrlDialogOpen: true, isMidiDialogOpen: false });
   }
 
   _onUrlDialogClose() {
@@ -217,7 +226,7 @@ export default class App extends React.PureComponent {
 
   _onMidiDialogOpen() {
     trace(this, this._onMidiDialogOpen);
-    this.setState({ isMidiDialogOpen: true });
+    this.setState({ isMidiDialogOpen: true, isUrlDialogOpen: false });
   }
 
   _onMidiDialogClose() {
@@ -227,7 +236,7 @@ export default class App extends React.PureComponent {
 
   _onLoadErrorShow() {
     trace(this, this._onLoadErrorShow);
-    this.setState({ isLoadErrorVisible: true });
+    this.setState({ isLoadErrorVisible: true, isAudioContextUnsupportedErrorVisible: false });
   }
 
   _onLoadErrorHide() {
@@ -237,11 +246,29 @@ export default class App extends React.PureComponent {
 
   _onAudioContextUnsupportedErrorShow() {
     trace(this, this._onAudioContextUnsupportedErrorShow);
-    this.setState({ isAudioContextUnsupportedErrorVisible: true });
+    this.setState({ isAudioContextUnsupportedErrorVisible: true, isLoadErrorVisible: false });
   }
 
   _onAudioContextUnsupportedErrorHide() {
     trace(this, this._onAudioContextUnsupportedErrorHide);
     this.setState({ isAudioContextUnsupportedErrorVisible: false });
+  }
+
+  _onDialogOverlayShow() {
+    trace(this, this._onDialogOverlayShow);
+  }
+
+  _onDialogOverlayHide() {
+    trace(this, this._onDialogOverlayHide);
+    this.setState({ isUrlDialogOpen: false, isMidiDialogOpen: false });
+  }
+
+  _onErrorOverlayShow() {
+    trace(this, this._onErrorOverlayShow);
+  }
+
+  _onErrorOverlayHide() {
+    trace(this, this._onErrorOverlayHide);
+    this.setState({ isLoadErrorVisible: false, isAudioContextUnsupportedErrorVisible: false });
   }
 }

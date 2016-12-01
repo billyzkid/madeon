@@ -1,46 +1,52 @@
 @import "../styles/mixins";
 
 .app .dialog {
-  .content {
-    @include absolute-position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
-    width: 400px;
-    padding: 20px;
+  @include absolute-position($top: 50%, $left: 50%, $x: -50%, $y: -50%);
+  width: 400px;
+  padding: 20px;
+  text-align: center;
+  color: #0e2236;
+  background: #f8e9db;
+  transition: opacity 400ms ease-in 0ms, visibility 0ms linear 0ms;
+
+  &.hidden {
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 400ms ease-out 0ms, visibility 400ms linear 0ms;
+  }
+
+  h1 {
+    margin: 5px 0 0;
+    font-weight: 200;
+    font-size: 28px;
+    line-height: 1em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 1em 0;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 12px;
     text-align: center;
-    color: #0e2236;
-    background: #f8e9db;
+  }
 
-    h1 {
-      margin: 5px 0 0;
-      font-weight: 200;
-      font-size: 28px;
-      line-height: 1em;
-      text-transform: uppercase;
-    }
-
-    p {
-      margin: 1em 0;
-      font-size: 16px;
-      line-height: 20px;
-    }
-
-    input {
-      display: block;
-      width: 100%;
-      padding: 5px;
-      border: 0;
-      box-sizing: border-box;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    button {
-      @include absolute-position($top: 10px, $right: 10px);
-      padding: 0;
-      border: 0;
-      font-size: 28px;
-      line-height: 20px;
-      color: #000;
-      background: none;
-    }
+  button {
+    @include absolute-position($top: 10px, $right: 10px);
+    padding: 0;
+    border: 0;
+    font-size: 28px;
+    line-height: 20px;
+    color: #000;
+    background: none;
   }
 }

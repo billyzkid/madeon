@@ -1,5 +1,4 @@
 import React from "react";
-import Overlay from "./Overlay";
 import { trace, getClassNames } from "../scripts/functions";
 import "./Error.scss";
 
@@ -16,6 +15,16 @@ export default class Error extends React.PureComponent {
     trace(this, this.constructor, props);
   }
 
+  componentWillReceiveProps(nextProps) {
+    trace(this, this.componentWillReceiveProps, nextProps);
+
+    if (nextProps.isVisible && !this.props.isVisible) {
+      this._show();
+    } else if (!nextProps.isVisible && this.props.isVisible) {
+      this._hide();
+    }
+  }
+
   render() {
     trace(this, this.render);
 
@@ -25,10 +34,24 @@ export default class Error extends React.PureComponent {
 
     return (
       <div className={classNames}>
-        <Overlay isVisible={this.props.isVisible} onShow={this.props.onShow} onHide={this.props.onHide}>
-          <div className="content">{this.props.children}</div>
-        </Overlay>
+        {this.props.children}
       </div>
     );
+  }
+
+  _show() {
+    trace(this, this._show);
+
+    if (this.props.onShow) {
+      this.props.onShow();
+    }
+  }
+
+  _hide() {
+    trace(this, this._hide);
+
+    if (this.props.onHide) {
+      this.props.onHide();
+    }
   }
 }
