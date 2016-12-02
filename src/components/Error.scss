@@ -10,6 +10,10 @@
   background: #d4214f;
   transition: transform 400ms ease-in-out 0ms, visibility 0ms linear 0ms;
 
+  &:focus {
+    outline: none;
+  }
+  
   &.hidden {
     z-index: 1;
     transform: translateY(-100%);

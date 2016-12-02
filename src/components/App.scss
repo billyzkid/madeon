@@ -10,10 +10,10 @@
   font: 16px "Lato", sans-serif;
   color: #fff;
 
-  :focus {
-    outline: #4d90fe solid 1px;
-    outline-offset: -1px;
-  }
+  // :focus {
+  //   outline: #4d90fe solid 1px;
+  //   outline-offset: -1px;
+  // }
 
   a {
     color: inherit;
@@ -23,6 +23,10 @@
   input {
     font: inherit;
   }
+
+  // input[readonly]:focus {
+  //   outline: none;
+  // }
 
   .splash {
     opacity: 0;

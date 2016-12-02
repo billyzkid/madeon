@@ -1,4 +1,5 @@
 import React from "react";
+import FocusTrap from "focus-trap-react";
 import { trace, getClassNames } from "../scripts/functions";
 import "./Error.scss";
 
@@ -7,22 +8,49 @@ export default class Error extends React.PureComponent {
     isVisible: React.PropTypes.bool,
     onShow: React.PropTypes.func,
     onHide: React.PropTypes.func,
+    initialFocus: React.PropTypes.any,
+    fallbackFocus: React.PropTypes.any,
+    hideOnEscape: React.PropTypes.bool,
+    hideOnClick: React.PropTypes.bool,
+    returnFocusOnHide: React.PropTypes.bool,
     children: React.PropTypes.node
+  }
+
+  static defaultProps = {
+    isVisible: false,
+    //initialFocus: ".error",
+    //fallbackFocus: ".error",
+    hideOnEscape: false,
+    hideOnClick: false,
+    returnFocusOnHide: true
   }
 
   constructor(props) {
     super(props);
     trace(this, this.constructor, props);
+
+    // See https://github.com/davidtheclark/focus-trap
+    this._focusTrapOptions = {
+      onActivate: props.onShow,
+      onDeactivate: props.onHide,
+      initialFocus: props.initialFocus,
+      fallbackFocus: props.fallbackFocus,
+      escapeDeactivates: props.hideOnEscape,
+      clickOutsideDeactivates: props.hideOnClick,
+      returnFocusOnDeactivate: props.returnFocusOnHide,
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     trace(this, this.componentWillReceiveProps, nextProps);
 
-    if (nextProps.isVisible && !this.props.isVisible) {
-      this._show();
-    } else if (!nextProps.isVisible && this.props.isVisible) {
-      this._hide();
-    }
+    this._focusTrapOptions.onActivate = nextProps.onShow;
+    this._focusTrapOptions.onDeactivate = nextProps.onHide;
+    this._focusTrapOptions.initialFocus = nextProps.initialFocus;
+    this._focusTrapOptions.fallbackFocus = nextProps.fallbackFocus;
+    this._focusTrapOptions.escapeDeactivates = nextProps.hideOnEscape;
+    this._focusTrapOptions.clickOutsideDeactivates = nextProps.hideOnClick;
+    this._focusTrapOptions.returnFocusOnDeactivate = nextProps.returnFocusOnHide;
   }
 
   render() {
@@ -33,25 +61,9 @@ export default class Error extends React.PureComponent {
     });
 
     return (
-      <div className={classNames}>
+      <FocusTrap className={classNames} active={this.props.isVisible} focusTrapOptions={this._focusTrapOptions} tabIndex="-1">
         {this.props.children}
-      </div>
+      </FocusTrap>
     );
-  }
-
-  _show() {
-    trace(this, this._show);
-
-    if (this.props.onShow) {
-      this.props.onShow();
-    }
-  }
-
-  _hide() {
-    trace(this, this._hide);
-
-    if (this.props.onHide) {
-      this.props.onHide();
-    }
   }
 }

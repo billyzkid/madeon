@@ -116,21 +116,23 @@ export default class App extends React.PureComponent {
             </section>
           </div>
           <div className="dialogs">
-            <Overlay isInitialFocusEnabled isDismissEnabled isEscapeEnabled isVisible={this.state.isUrlDialogOpen || this.state.isMidiDialogOpen} onShow={this._onDialogOverlayShow} onHide={this._onDialogOverlayHide}>
+            <Overlay isVisible={this.state.isUrlDialogOpen || this.state.isMidiDialogOpen}>
               <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
                 <h1>Your mix URL</h1>
                 <p>Copy the following URL, and then share it with the world.</p>
                 <input type="url" value={this._getUrl()} readOnly />
+                <Button icon="&#xf00d;" title="Close dialog" onClick={this._onUrlDialogClose}>Close</Button>
               </Dialog>
               <Dialog isOpen={this.state.isMidiDialogOpen} onOpen={this._onMidiDialogOpen} onClose={this._onMidiDialogClose}>
                 <h1>Enable Web MIDI API</h1>
                 <p>Copy the following URL, paste it into a new tab, press Enter, and then click Enable.</p>
                 <input type="url" value="chrome://flags/#enable-web-midi" readOnly />
+                <Button icon="&#xf00d;" title="Close dialog" onClick={this._onMidiDialogClose}>Close</Button>
               </Dialog>
             </Overlay>
           </div>
           <div className="errors">
-            <Overlay isInitialFocusEnabled isVisible={this.state.isLoadErrorVisible || this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onErrorOverlayShow} onHide={this._onErrorOverlayHide}>
+            <Overlay isVisible={this.state.isLoadErrorVisible || this.state.isAudioContextUnsupportedErrorVisible}>
               <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
                 <p>Something went horribly wrong.</p>
                 <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>

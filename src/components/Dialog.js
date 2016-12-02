@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import FocusTrap from "focus-trap-react";
 import { trace, getClassNames } from "../scripts/functions";
 import "./Dialog.scss";
 
@@ -8,24 +8,49 @@ export default class Dialog extends React.PureComponent {
     isOpen: React.PropTypes.bool,
     onOpen: React.PropTypes.func,
     onClose: React.PropTypes.func,
+    initialFocus: React.PropTypes.any,
+    fallbackFocus: React.PropTypes.any,
+    closeOnEscape: React.PropTypes.bool,
+    closeOnClick: React.PropTypes.bool,
+    returnFocusOnClose: React.PropTypes.bool,
     children: React.PropTypes.node
+  }
+
+  static defaultProps = {
+    isOpen: false,
+    //initialFocus: ".dialog",
+    //fallbackFocus: ".dialog",
+    closeOnEscape: true,
+    closeOnClick: true,
+    returnFocusOnClose: true
   }
 
   constructor(props) {
     super(props);
     trace(this, this.constructor, props);
 
-    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
+    // See https://github.com/davidtheclark/focus-trap
+    this._focusTrapOptions = {
+      onActivate: props.onOpen,
+      onDeactivate: props.onClose,
+      initialFocus: props.initialFocus,
+      fallbackFocus: props.fallbackFocus,
+      escapeDeactivates: props.closeOnEscape,
+      clickOutsideDeactivates: props.closeOnClick,
+      returnFocusOnDeactivate: props.returnFocusOnClose,
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     trace(this, this.componentWillReceiveProps, nextProps);
 
-    if (nextProps.isOpen && !this.props.isOpen) {
-      this._open();
-    } else if (!nextProps.isOpen && this.props.isOpen) {
-      this._close();
-    }
+    this._focusTrapOptions.onActivate = nextProps.onOpen;
+    this._focusTrapOptions.onDeactivate = nextProps.onClose;
+    this._focusTrapOptions.initialFocus = nextProps.initialFocus;
+    this._focusTrapOptions.fallbackFocus = nextProps.fallbackFocus;
+    this._focusTrapOptions.escapeDeactivates = nextProps.closeOnEscape;
+    this._focusTrapOptions.clickOutsideDeactivates = nextProps.closeOnClick;
+    this._focusTrapOptions.returnFocusOnDeactivate = nextProps.returnFocusOnClose;
   }
 
   render() {
@@ -36,33 +61,9 @@ export default class Dialog extends React.PureComponent {
     });
 
     return (
-      <div className={classNames}>
+      <FocusTrap className={classNames} active={this.props.isOpen} focusTrapOptions={this._focusTrapOptions} tabIndex="-1">
         {this.props.children}
-        <Button icon="&#xf00d;" title="Close dialog" onClick={this._onCloseButtonClick}>Close</Button>
-      </div>
+      </FocusTrap>
     );
-  }
-
-  _open() {
-    trace(this, this._open);
-
-    if (this.props.onOpen) {
-      this.props.onOpen();
-    }
-  }
-
-  _close() {
-    trace(this, this._close);
-
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  }
-
-  _onCloseButtonClick(event) {
-    trace(this, this._onCloseButtonClick, event);
-    
-    event.stopPropagation();
-    this._close();
   }
 }

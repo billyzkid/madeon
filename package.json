@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "focus-trap": "^2.1.0",
+    "focus-trap-react": "^3.0.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },
