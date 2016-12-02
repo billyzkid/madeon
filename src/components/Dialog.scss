@@ -41,12 +41,16 @@
   }
 
   button {
-    @include absolute-position($top: 10px, $right: 10px);
-    padding: 0;
+    @include absolute-position($top: 5px, $right: 5px);
+    padding: 5px;
     border: 0;
-    font-size: 28px;
-    line-height: 20px;
     color: #000;
     background: none;
+
+    &::before {
+      padding: 0 0 2px;
+      font-size: 28px;
+      line-height: 20px;
+    }
   }
 }

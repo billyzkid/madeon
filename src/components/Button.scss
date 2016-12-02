@@ -2,6 +2,7 @@
   color: #000;
   background: #ccc;
   cursor: pointer;
+  user-select: none;
   transition: color 200ms ease 0ms, background 200ms ease 0ms, opacity 500ms ease-in 0ms, visibility 0ms linear 0ms;
 
   &.active {

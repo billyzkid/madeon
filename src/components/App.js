@@ -116,7 +116,7 @@ export default class App extends React.PureComponent {
             </section>
           </div>
           <div className="dialogs">
-            <Overlay isDismissEnabled isEscapeEnabled isVisible={this.state.isUrlDialogOpen || this.state.isMidiDialogOpen} onShow={this._onDialogOverlayShow} onHide={this._onDialogOverlayHide}>
+            <Overlay isInitialFocusEnabled isDismissEnabled isEscapeEnabled isVisible={this.state.isUrlDialogOpen || this.state.isMidiDialogOpen} onShow={this._onDialogOverlayShow} onHide={this._onDialogOverlayHide}>
               <Dialog isOpen={this.state.isUrlDialogOpen} onOpen={this._onUrlDialogOpen} onClose={this._onUrlDialogClose}>
                 <h1>Your mix URL</h1>
                 <p>Copy the following URL, and then share it with the world.</p>
@@ -130,7 +130,7 @@ export default class App extends React.PureComponent {
             </Overlay>
           </div>
           <div className="errors">
-            <Overlay isDismissEnabled isEscapeEnabled isVisible={this.state.isLoadErrorVisible || this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onErrorOverlayShow} onHide={this._onErrorOverlayHide}>
+            <Overlay isInitialFocusEnabled isVisible={this.state.isLoadErrorVisible || this.state.isAudioContextUnsupportedErrorVisible} onShow={this._onErrorOverlayShow} onHide={this._onErrorOverlayHide}>
               <Error isVisible={this.state.isLoadErrorVisible} onShow={this._onLoadErrorShow} onHide={this._onLoadErrorHide}>
                 <p>Something went horribly wrong.</p>
                 <p>Please <a href="" onClick={this._onReloadLinkClick}>reload</a> the page or try back later.</p>
